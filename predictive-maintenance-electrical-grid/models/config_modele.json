@@ -1,6 +1,6 @@
 {
     "nom_modele": "GradientBoostingClassifier",
-    "date_entrainement": "2026-06-19",
+    "date_entrainement": "2026-06-24",
     "objectif": "Prédiction de panne machine (Machine failure) - Niveau 1",
     "hyperparametres": {
         "n_estimators": 150,
@@ -53,23 +53,23 @@
     "top_features_shap": [
         {
             "feature": "Tool wear [min]",
-            "importance_moyenne": 0.5813889627344734
+            "importance_moyenne": 0.585979422523716
         },
         {
             "feature": "Rotational speed [rpm]",
-            "importance_moyenne": 0.47187780653571154
+            "importance_moyenne": 0.4716936432326848
         },
         {
             "feature": "temp_diff",
-            "importance_moyenne": 0.37035668982037284
-        },
-        {
-            "feature": "power_kw",
-            "importance_moyenne": 0.146938016891155
+            "importance_moyenne": 0.37102480326031334
         },
         {
             "feature": "Torque [Nm]",
-            "importance_moyenne": 0.14467878577628862
+            "importance_moyenne": 0.15568894843610664
+        },
+        {
+            "feature": "power_kw",
+            "importance_moyenne": 0.14684100668296707
         }
     ]
 }
