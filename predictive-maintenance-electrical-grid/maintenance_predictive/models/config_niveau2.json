@@ -1,0 +1,79 @@
+{
+    "nom_modele": "MultiOutputClassifier(GradientBoostingClassifier) — Niveau 2",
+    "date_entrainement": "2026-06-25",
+    "objectif": "Identification du mode de panne (TWF, HDF, PWF, OSF, RNF) — classification multi-label",
+    "hyperparametres": {
+        "n_estimators": 150,
+        "learning_rate": 0.05,
+        "max_depth": 4
+    },
+    "strategie_desequilibre": "Aucune — GradientBoosting sans SMOTE ni class_weight",
+    "preprocessing": {
+        "scaler": "RobustScaler",
+        "features_scalees": [
+            "Air temperature [K]",
+            "Process temperature [K]",
+            "Rotational speed [rpm]",
+            "Torque [Nm]",
+            "Tool wear [min]",
+            "temp_diff",
+            "power_kw",
+            "thermal_stress"
+        ],
+        "renommage_colonnes": "re.sub('[\\[\\]<>]', '', col).strip().replace(' ', '_')"
+    },
+    "labels": [
+        "TWF",
+        "HDF",
+        "PWF",
+        "OSF",
+        "RNF"
+    ],
+    "seuils_production": {
+        "TWF": null,
+        "HDF": 0.7846,
+        "PWF": 0.9998,
+        "OSF": 0.2058,
+        "RNF": null
+    },
+    "notes_production": {
+        "TWF": "Exclure du modèle — signal trop faible (10 cas seulement). Remplacer par règle heuristique : Tool wear > seuil physique connu.",
+        "RNF": "Exclure du modèle — panne aléatoire par définition, non prédictible par capteurs."
+    },
+    "metriques_test_seuil_defaut": {
+        "hamming_loss": 0.0021,
+        "f1_macro": 0.5705,
+        "f1_micro": 0.8397,
+        "f1_par_label": {
+            "TWF": 0.0,
+            "HDF": 0.95,
+            "PWF": 1.0,
+            "OSF": 0.9,
+            "RNF": 0.0
+        }
+    },
+    "metriques_test_seuil_optimise": {
+        "hamming_loss": 0.0144,
+        "f1_macro": 0.6552,
+        "f1_micro": 0.4745,
+        "f1_par_label": {
+            "TWF": 0.11,
+            "HDF": 0.98,
+            "PWF": 1.0,
+            "OSF": 0.94,
+            "RNF": 0.25
+        }
+    },
+    "features_utilisees": [
+        "Air_temperature_K",
+        "Process_temperature_K",
+        "Rotational_speed_rpm",
+        "Torque_Nm",
+        "Tool_wear_min",
+        "temp_diff",
+        "power_kw",
+        "thermal_stress",
+        "Type_encoded"
+    ],
+    "features_exclues_raison": "Machine failure exclue (agrégation des labels cibles, pas une feature d'entrée)"
+}

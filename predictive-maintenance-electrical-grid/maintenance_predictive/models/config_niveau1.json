@@ -1,0 +1,75 @@
+{
+    "nom_modele": "GradientBoostingClassifier",
+    "date_entrainement": "2026-06-26",
+    "objectif": "Prédiction de panne machine (Machine failure) - Niveau 1",
+    "hyperparametres": {
+        "n_estimators": 150,
+        "learning_rate": 0.05,
+        "max_depth": 4
+    },
+    "strategie_desequilibre": "Aucune (SMOTE testé mais écarté, dégradait la precision)",
+    "preprocessing": {
+        "scaler": "RobustScaler",
+        "features_scalees": [
+            "Air temperature [K]",
+            "Process temperature [K]",
+            "Rotational speed [rpm]",
+            "Torque [Nm]",
+            "Tool wear [min]",
+            "temp_diff",
+            "power_kw",
+            "thermal_stress"
+        ]
+    },
+    "seuil_decision": 0.4236,
+    "metriques_test": {
+        "precision_panne": 0.93,
+        "recall_panne": 0.82,
+        "f1_panne": 0.88,
+        "auc_roc": 0.9798,
+        "auc_pr": null
+    },
+    "features_utilisees": [
+        "Air temperature [K]",
+        "Process temperature [K]",
+        "Rotational speed [rpm]",
+        "Torque [Nm]",
+        "Tool wear [min]",
+        "temp_diff",
+        "power_kw",
+        "thermal_stress",
+        "Type_encoded"
+    ],
+    "features_exclues": [
+        "UDI",
+        "Product ID",
+        "TWF",
+        "HDF",
+        "PWF",
+        "OSF",
+        "RNF"
+    ],
+    "raison_exclusion": "TWF/HDF/PWF/OSF/RNF encodent directement les causes de Machine failure (data leakage)",
+    "top_features_shap": [
+        {
+            "feature": "Tool wear [min]",
+            "importance_moyenne": 0.5856575724355908
+        },
+        {
+            "feature": "Rotational speed [rpm]",
+            "importance_moyenne": 0.4714944488553132
+        },
+        {
+            "feature": "temp_diff",
+            "importance_moyenne": 0.3710873163641748
+        },
+        {
+            "feature": "Torque [Nm]",
+            "importance_moyenne": 0.15572582063279883
+        },
+        {
+            "feature": "power_kw",
+            "importance_moyenne": 0.14669763900342295
+        }
+    ]
+}
