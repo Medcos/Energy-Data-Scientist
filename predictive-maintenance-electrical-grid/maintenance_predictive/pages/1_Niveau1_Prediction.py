@@ -35,7 +35,7 @@ def predire(df_brut):
     df = feature_engineering(df_brut)
 
     numeric_cols = ['Air temperature [K]', 'Process temperature [K]',
-                    'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]',
+                    'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'Type_encoded',
                     'temp_diff', 'power_kw', 'thermal_stress']
 
     # Conversion en array numpy pour éviter l'erreur de noms de colonnes
