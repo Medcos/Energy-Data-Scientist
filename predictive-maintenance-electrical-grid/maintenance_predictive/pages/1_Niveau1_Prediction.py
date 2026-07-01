@@ -38,7 +38,15 @@ def predire(df_brut):
                     'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]',
                     'temp_diff', 'power_kw', 'thermal_stress']
 
-    df[numeric_cols] = scaler.transform(df[numeric_cols])
+    # Conversion en array numpy pour éviter l'erreur de noms de colonnes
+    import numpy as np
+    X_to_scale = df[numeric_cols].values
+    X_scaled   = scaler.transform(X_to_scale)
+
+    # Reconstruire avec les bons noms de colonnes
+    df_scaled = pd.DataFrame(X_scaled, columns=numeric_cols)
+    df[numeric_cols] = df_scaled[numeric_cols].values
+
     X     = df[config['features_utilisees']]
     proba = float(model.predict_proba(X)[0, 1])
     pred  = int(proba >= config['seuil_decision'])
