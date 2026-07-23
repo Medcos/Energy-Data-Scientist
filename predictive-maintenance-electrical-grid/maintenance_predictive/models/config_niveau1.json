@@ -9,6 +9,21 @@
         "max_depth": 4
     },
     "seuil_decision": 0.4236,
+    "preprocessing": {
+        "scaler": "RobustScaler",
+        "features_scalees": [
+            "Air temperature [K]",
+            "Process temperature [K]",
+            "Rotational speed [rpm]",
+            "Torque [Nm]",
+            "Tool wear [min]",
+            "temp_diff",
+            "power_kw",
+            "thermal_stress",
+            "Type_encoded"
+        ],
+        "note": "Type_encoded en DERNIER — ordre identique au fit du RobustScaler (feature_names_in_)"
+    },
     "features_utilisees": [
         "Air temperature [K]",
         "Process temperature [K]",
@@ -20,10 +35,27 @@
         "thermal_stress",
         "Type_encoded"
     ],
+    "features_exclues": [
+        "UDI",
+        "Product ID",
+        "TWF",
+        "HDF",
+        "PWF",
+        "OSF",
+        "RNF"
+    ],
+    "raison_exclusion": "TWF/HDF/PWF/OSF/RNF encodent directement les causes de Machine failure (data leakage)",
     "metriques_test": {
         "precision_panne": 0.93,
         "recall_panne": 0.82,
         "f1_panne": 0.88,
         "auc_roc": 0.9798
-    }
+    },
+    "top_features_shap": [
+        {"feature": "Tool wear [min]",        "importance_moyenne": 0.5857},
+        {"feature": "Rotational speed [rpm]", "importance_moyenne": 0.4715},
+        {"feature": "temp_diff",              "importance_moyenne": 0.3711},
+        {"feature": "Torque [Nm]",            "importance_moyenne": 0.1557},
+        {"feature": "power_kw",               "importance_moyenne": 0.1467}
+    ]
 }
