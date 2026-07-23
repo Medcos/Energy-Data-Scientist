@@ -5,7 +5,6 @@ import joblib
 import json
 import os
 import plotly.graph_objects as go
-import plotly.express as px
 from datetime import datetime
 
 
@@ -34,18 +33,25 @@ def feature_engineering(df):
 def predire(df_brut):
     df = feature_engineering(df_brut)
 
-    numeric_cols = ['Air temperature [K]', 'Process temperature [K]',
-                    'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]', 'Type_encoded',
-                    'temp_diff', 'power_kw', 'thermal_stress']
+    # ORDRE IDENTIQUE AU FIT DU RobustScaler (scaler.feature_names_in_)
+    # Vérifié : ['Air temperature [K]', 'Process temperature [K]',
+    #            'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]',
+    #            'temp_diff', 'power_kw', 'thermal_stress', 'Type_encoded']
+    # Type_encoded est en DERNIÈRE position (index 8)
+    numeric_cols = [
+        'Air temperature [K]',
+        'Process temperature [K]',
+        'Rotational speed [rpm]',
+        'Torque [Nm]',
+        'Tool wear [min]',
+        'temp_diff',
+        'power_kw',
+        'thermal_stress',
+        'Type_encoded'   # ← EN DERNIER — ne pas déplacer
+    ]
 
-    # Conversion en array numpy pour éviter l'erreur de noms de colonnes
-    import numpy as np
-    X_to_scale = df[numeric_cols].values
-    X_scaled   = scaler.transform(X_to_scale)
-
-    # Reconstruire avec les bons noms de colonnes
-    df_scaled = pd.DataFrame(X_scaled, columns=numeric_cols)
-    df[numeric_cols] = df_scaled[numeric_cols].values
+    # Passage en DataFrame nommé : sklearn vérifie noms ET ordre
+    df[numeric_cols] = scaler.transform(df[numeric_cols])
 
     X     = df[config['features_utilisees']]
     proba = float(model.predict_proba(X)[0, 1])
@@ -134,17 +140,17 @@ with col2:
             "axis"  : {"range": [0, 100], "tickwidth": 1},
             "bar"   : {"color": "#FF4B4B" if prediction == 1 else "#00C853"},
             "steps" : [
-                {"range": [0,  config['seuil_decision']*100], "color": "#E8F5E9"},
-                {"range": [config['seuil_decision']*100, 100], "color": "#FFEBEE"},
+                {"range": [0,   config['seuil_decision'] * 100], "color": "#E8F5E9"},
+                {"range": [config['seuil_decision'] * 100, 100], "color": "#FFEBEE"},
             ],
             "threshold": {
-                "line" : {"color": "#1F4E79", "width": 4},
+                "line"     : {"color": "#1F4E79", "width": 4},
                 "thickness": 0.85,
-                "value": config['seuil_decision'] * 100
+                "value"    : config['seuil_decision'] * 100
             }
         }
     ))
-    fig_gauge.update_layout(height=250, margin=dict(t=40,b=0,l=20,r=20))
+    fig_gauge.update_layout(height=250, margin=dict(t=40, b=0, l=20, r=20))
     st.plotly_chart(fig_gauge, use_container_width=True)
 
 # Features engineerées calculées
@@ -167,29 +173,29 @@ st.subheader("📊 Profil des capteurs")
 col_radar, col_table = st.columns([1, 1])
 
 with col_radar:
-    # Normalisation min-max pour le radar
     ranges = {
-        'Air temp [K]'   : (295, 305),
-        'Process temp [K]': (305, 315),
-        'Vitesse [rpm]'  : (1168, 2886),
-        'Couple [Nm]'    : (3.8, 76.6),
-        'Usure [min]'    : (0, 253),
+        'Air temp [K]'    : (295,  305),
+        'Process temp [K]': (305,  315),
+        'Vitesse [rpm]'   : (1168, 2886),
+        'Couple [Nm]'     : (3.8,  76.6),
+        'Usure [min]'     : (0,    253),
     }
-    vals_raw = [air_temp, proc_temp, rot_speed, torque, tool_wear]
+    vals_raw  = [air_temp, proc_temp, rot_speed, torque, tool_wear]
     vals_norm = [(v - r[0]) / (r[1] - r[0]) * 100
                  for v, r in zip(vals_raw, ranges.values())]
 
     fig_radar = go.Figure(go.Scatterpolar(
-        r      = vals_norm + [vals_norm[0]],
-        theta  = list(ranges.keys()) + [list(ranges.keys())[0]],
-        fill   = 'toself',
-        line_color = "#FF4B4B" if prediction == 1 else "#1F4E79",
-        fillcolor  = "rgba(255,75,75,0.2)" if prediction == 1 else "rgba(31,78,121,0.2)"
+        r         = vals_norm + [vals_norm[0]],
+        theta     = list(ranges.keys()) + [list(ranges.keys())[0]],
+        fill      = 'toself',
+        line_color  = "#FF4B4B" if prediction == 1 else "#1F4E79",
+        fillcolor   = "rgba(255,75,75,0.2)" if prediction == 1 else "rgba(31,78,121,0.2)"
     ))
     fig_radar.update_layout(
-        polar=dict(radialaxis=dict(visible=True, range=[0,100])),
-        showlegend=False, height=350,
-        margin=dict(t=40,b=40,l=40,r=40)
+        polar      = dict(radialaxis=dict(visible=True, range=[0, 100])),
+        showlegend = False,
+        height     = 350,
+        margin     = dict(t=40, b=40, l=40, r=40)
     )
     st.plotly_chart(fig_radar, use_container_width=True)
 
@@ -206,8 +212,8 @@ with col_table:
     st.markdown("**Métriques du modèle**")
     metriques = config.get('metriques_test', {})
     df_metrics = pd.DataFrame({
-        'Métrique' : ['Precision', 'Recall', 'F1-score', 'AUC-ROC'],
-        'Valeur'   : [
+        'Métrique': ['Precision', 'Recall', 'F1-score', 'AUC-ROC'],
+        'Valeur'  : [
             metriques.get('precision_panne', 0.93),
             metriques.get('recall_panne',    0.82),
             metriques.get('f1_panne',        0.88),
