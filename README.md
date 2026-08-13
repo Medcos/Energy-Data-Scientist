@@ -1,5 +1,7 @@
 # Energy-Data-Scientist
 
+[🇬🇧 English version](README-Energy-Data-Scientist-root.en.md)
+
 Portfolio de projets à l'intersection de l'ingénierie électrique/électromécanique et de la data science / du développement de plateformes SaaS.
 
 ## Projets
