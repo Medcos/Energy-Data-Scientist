@@ -1,0 +1,15 @@
+# Données réelles / secrets — ne jamais committer
+*.xlsx
+*.xlsm
+credentials.json
+.env
+appsscript.json
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Exports temporaires
+*.log
