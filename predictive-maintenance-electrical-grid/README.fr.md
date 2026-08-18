@@ -24,7 +24,7 @@ Développé par Medico Diomande — Ingénieur Électromécanicien (10 ans d'exp
 - → 3 modèles comparés par niveau : Régression Logistique, Random Forest, Gradient Boosting
 - → Optimisation du seuil de décision par label (courbe Precision-Recall, maximisation du F1)
 - → Interprétabilité SHAP pour les deux niveaux, validant la cohérence physique des mécanismes appris
-- → Dashboard Streamlit en ligne : [URL Streamlit Cloud]
+- → Dashboard Streamlit en ligne :[maintenance-predictive-medico.streamlit.app](https://maintenance-predictive-medico.streamlit.app/)]
 
 ## Résultats — Niveau 1 (Prédiction de panne)
 

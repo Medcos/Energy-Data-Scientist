@@ -24,7 +24,7 @@ Built by Medico Diomande — Electromechanical Engineer (10 years field experien
 - → 3 models compared per level: Logistic Regression, Random Forest, Gradient Boosting
 - → Per-label decision threshold optimization (Precision-Recall curve, F1 maximization)
 - → SHAP interpretability for both levels, validating physical coherence of learned mechanisms
-- → Live Streamlit dashboard: [Streamlit Cloud URL]
+- → Live Streamlit dashboard: [maintenance-predictive-medico.streamlit.app](https://maintenance-predictive-medico.streamlit.app/)
 
 ## Results — Level 1 (Failure Prediction)
 
