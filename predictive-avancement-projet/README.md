@@ -28,7 +28,7 @@ pip install -r requirements.txt
 P2AE_PUBLIC_MODE=1 streamlit run app/streamlit_app.py
 ```
 
-Dashboard à 3 pages : Ressources, Avancement, Risques. Lien de démo en ligne : *(à ajouter après déploiement Streamlit Cloud)*.
+Dashboard à 3 pages : Ressources, Avancement, Risques. Lien de démo en ligne : *energy-data-scientist-mdz2vr9ozqxhey3t5nprkh*.
 
 ## Structure du dépôt
 
