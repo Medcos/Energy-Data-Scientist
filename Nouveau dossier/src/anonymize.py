@@ -92,59 +92,6 @@ def anonymize_sheets(
     return anon
 
 
-# ----------------------------------------------------------------------------
-# Pseudonymisation des localités/communes — décision D5 (reports/cadrage_jour1.md)
-#
-# Contrairement aux emails/GPS (PII au sens strict, traité ci-dessus), les noms
-# de localités et communes sont des données publiques (divisions administratives
-# du Bénin). Leur pseudonymisation répond à un risque différent : la
-# confidentialité contractuelle/institutionnelle d'un marché financé par un
-# bailleur international, une fois croisées avec des données de performance
-# nommées (avancement, retard, anomalies). Les départements restent en clair
-# (information déjà publique de l'existence du P2AE dans ces 4 départements).
-# ----------------------------------------------------------------------------
-def build_locality_pseudonym_mapping(localites: list[str]) -> dict[str, str]:
-    """Construit un mapping localité réelle -> pseudonyme stable (Localite_A, B...).
-
-    Ordre alphabétique des noms réels pour un mapping déterministe et
-    reproductible (même entrée -> même pseudonyme à chaque exécution).
-    """
-    noms_ordonnes = sorted(set(localites))
-    if len(noms_ordonnes) <= 26:
-        lettres = [chr(65 + i) for i in range(len(noms_ordonnes))]
-        return {nom: f"Localite_{l}" for nom, l in zip(noms_ordonnes, lettres)}
-    return {nom: f"Localite_{i+1:03d}" for i, nom in enumerate(noms_ordonnes)}
-
-
-def build_commune_pseudonym_mapping(communes: list[str]) -> dict[str, str]:
-    """Idem pour les communes (Commune_A, B...)."""
-    noms_ordonnes = sorted(set(communes))
-    lettres = [chr(65 + i) for i in range(len(noms_ordonnes))]
-    return {nom: f"Commune_{l}" for nom, l in zip(noms_ordonnes, lettres)}
-
-
-def pseudonymize_table(
-    df: pd.DataFrame,
-    mapping_localite: dict[str, str],
-    mapping_commune: dict[str, str],
-    col_localite: str = "Localite",
-    col_commune: str = "Commune",
-) -> pd.DataFrame:
-    """Retourne une copie de df avec les colonnes localité/commune pseudonymisées.
-
-    Le Département n'est jamais touché (décision D5 : information publique).
-    Les colonnes ID_Localite (codes déjà opaques type 'ATA_Nat_08') sont
-    laissées telles quelles : elles n'exposent pas de nom en clair, et les
-    conserver permet de recouper les tables publiques entre elles.
-    """
-    out = df.copy()
-    if col_localite in out.columns:
-        out[col_localite] = out[col_localite].map(mapping_localite).fillna(out[col_localite])
-    if col_commune in out.columns:
-        out[col_commune] = out[col_commune].map(mapping_commune).fillna(out[col_commune])
-    return out
-
-
 def audit_pii(sheets: dict[str, pd.DataFrame]) -> pd.DataFrame:
     """Petit rapport listant, feuille par feuille, les colonnes jugées sensibles."""
     lignes = []

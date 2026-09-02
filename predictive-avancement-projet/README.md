@@ -1,44 +1,34 @@
 # p2ae-rollout-forecast
 
-Modélisation prédictive de l'avancement et de l'approvisionnement — Projet P2AE (SBEE Bénin, 4 départements, 55 localités).
+Modélisation prédictive de l'avancement et de l'approvisionnement sur un chantier d'électrification rurale (SBEE Bénin, Afrique de l'Ouest, financement international) — 55 localités, 4 départements, échéance décembre 2026.
 
-Deuxième volet du portfolio de data science appliquée à l'énergie et aux infrastructures, après la maintenance prédictive (classification, F1 = 0,88, SHAP, dashboard Streamlit). Ce projet s'appuie sur les données réelles et vivantes du chantier P2AE que je pilote via ElecTrack Pro, pour construire un pipeline unique alimentant trois modèles légers :
+Deuxième volet d'un portfolio de data science appliquée à l'énergie et aux infrastructures, après un projet de maintenance prédictive (classification, F1 = 0,88, SHAP, dashboard Streamlit). Ce projet transforme un système de suivi de chantier réel en outil de pilotage prédictif, avec trois modèles légers partageant un même pipeline de données :
 
 - **A. Ressources** — quantité de matériel restant à livrer par localité × tâche (régression)
-- **B. Avancement** — projection de l'avancement HTA/BT à S+2 / S+4 par département (régression temporelle)
-- **C. Risque de retard** — probabilité qu'une localité prenne du retard sur son planning contractuel (classification)
+- **B. Avancement** — projection de l'avancement à S+2 / S+4 par département (série temporelle)
+- **C. Risque de retard** — localités en retard relatif par rapport à leurs pairs (classification)
+- **D. Segmentation** — 4 profils de localités, sans étiquette préexistante (clustering, bonus)
 
-## ⚠️ Note de confidentialité
+**Résultats clés** — détail complet dans [`reports/synthese_resultats_publique.md`](reports/synthese_resultats_publique.md) :
+- 7 unités / 1 376 mètres d'erreur moyenne (Modèle A) contre 20 unités / 2 637 m sans modèle
+- 4,3 points de % d'erreur à 4 semaines (Modèle B) contre 7,3 en ne changeant rien
+- 15 localités à risque relatif détectées à 93 % (Modèle C)
+- Un groupe de localités isolé par le clustering (Modèle D) coïncide **exactement** avec un groupe identifié par une méthode totalement indépendante — une validation croisée qui ne devait rien au hasard
 
-Les données sources (`data/raw/Localites_raw.xlsx`) proviennent d'un projet réel financé par un bailleur international et contiennent des données personnelles (emails d'agents terrain, coordonnées GPS précises de sites et de bases-vie). **Ce fichier n'est jamais versionné** (voir `.gitignore`).
+## 🔒 Note de confidentialité
 
-Seules des données **anonymisées et agrégées** sont publiées dans `data/processed/` :
-- les emails sont remplacés par un identifiant stable (`agent_01`…`agent_07`), cohérent entre toutes les feuilles ;
-- les coordonnées GPS précises et les numéros de téléphone sont supprimés (le département/la commune, déjà présents par ailleurs, suffisent à la démonstration) ;
-- les noms complets sont supprimés.
+Ce dépôt contient des données **pseudonymisées** issues d'un projet réel financé par un bailleur international. Les noms de localités et de communes sont remplacés par des identifiants génériques (`Localite_001`…`Localite_055`, `Commune_A`…`Commune_I`) ; seuls les départements (division administrative publique du Bénin) restent en clair. Les modèles fournis (`models/public/`) ont été **ré-entraînés sur ces données pseudonymisées** — aucun encodeur catégoriel du dépôt ne contient de nom réel. Le détail de cette politique de confidentialité (décision D5) est documenté dans [`reports/cadrage_jour1.md`](reports/cadrage_jour1.md).
 
-Le détail de cette anonymisation (feuille par feuille, colonne par colonne) est documenté dans [`reports/audit_feuilles_localites.md`](reports/audit_feuilles_localites.md).
+*(Les notebooks d'analyse détaillée avec données réelles restent un usage interne, non publié — voir la section suivante.)*
 
-## Avancement du projet
+## Démo
 
-- [x] **Jour 1** — Cadrage écrit, audit des 29 feuilles, extraction et anonymisation, construction de la table pivot
-  → [`reports/cadrage_jour1.md`](reports/cadrage_jour1.md) · [`reports/audit_feuilles_localites.md`](reports/audit_feuilles_localites.md) · [`notebooks/01_extraction_anonymisation.ipynb`](notebooks/01_extraction_anonymisation.ipynb)
-- [ ] Jour 2 — EDA ciblée + baselines
-- [ ] Jour 3 — Modèles retenus + validation croisée temporelle + SHAP
-- [ ] Jour 4 — Interprétabilité + synthèse métier
-- [ ] Jour 5 — Dashboard Streamlit + déploiement
-- [ ] Jour 6 (bonus) — Segmentation K-Means + vérification confidentialité contractuelle + pseudonymisation localités/communes (D5) + packaging final
+```bash
+pip install -r requirements.txt
+P2AE_PUBLIC_MODE=1 streamlit run app/streamlit_app.py
+```
 
-## Données produites (Jour 1)
-
-Trois tables pivot complémentaires (décision de cadrage documentée dans `reports/cadrage_jour1.md`, section 4) :
-
-| Fichier | Grain | Lignes | Modèle(s) alimenté(s) |
-|---|---|---:|---|
-| `data/processed/table_pivot_anonymisee.csv` | Localité × Tâche × Matériel | 997 | A |
-| `data/processed/table_pivot_ressources_temporelle_anonymisee.csv` | Localité × Tâche × Date | 910 | A, C |
-| `data/processed/table_avancement_departement_semaine_anonymisee.csv` | Département × Semaine | 100 | B, C |
-| `data/processed/sheets_anonymises/*.csv` | (natif) | — | 29 feuilles sources anonymisées, référence |
+Dashboard à 3 pages : Ressources, Avancement, Risques. Lien de démo en ligne : *(à ajouter après déploiement Streamlit Cloud)*.
 
 ## Structure du dépôt
 
@@ -46,26 +36,26 @@ Trois tables pivot complémentaires (décision de cadrage documentée dans `repo
 p2ae-rollout-forecast/
 ├── README.md
 ├── requirements.txt
-├── .gitignore
-├── data/
-│   ├── raw/                      # NON versionné
-│   └── processed/                # données anonymisées/agrégées uniquement
-├── notebooks/
-│   └── 01_extraction_anonymisation.ipynb
-├── src/
-│   ├── anonymize.py              # anonymisation réutilisable
-│   └── features.py               # construction des tables pivot
-├── scripts/
-│   └── build_notebook_01.py      # génère le notebook 01 à partir de cellules versionnées
-├── models/
 ├── app/
+│   └── streamlit_app.py          # dashboard 3 pages (mode public via P2AE_PUBLIC_MODE=1)
+├── src/
+│   ├── anonymize.py              # anonymisation PII + pseudonymisation localités/communes
+│   └── features.py               # construction des tables pivot
+├── data/
+│   └── public/                   # données pseudonymisées uniquement
+├── models/
+│   └── public/                   # modèles ré-entraînés sur données pseudonymisées
 └── reports/
-    ├── cadrage_jour1.md
-    └── audit_feuilles_localites.md
+    ├── synthese_resultats_publique.md
+    └── figures/
 ```
 
-## Limites méthodologiques assumées
+## Méthodologie
 
-- 55 localités, 20 semaines d'historique : échantillon volontairement restreint. L'objectif n'est pas une précision de niveau production, mais une méthodologie rigoureuse (baseline, validation temporelle, métriques métier, interprétabilité) appliquée à un cas réel.
-- La trajectoire théorique de référence (table `avancement_departement_semaine`) est ancrée sur la date administrative de démarrage du marché, antérieure de plusieurs mois au début du suivi terrain — voir `reports/cadrage_jour1.md` (décision D4) pour le détail et la correction prévue au Jour 3.
-- **Noms de localités/communes conservés en clair dans les données de travail** (`data/processed/`), décision assumée le 27/08/2026 (D5) : ce ne sont pas des données personnelles, mais leur croisement avec des données de performance nécessite une vérification de confidentialité contractuelle avant toute publication — action reportée au Jour 6, voir checklist ci-dessous.
+Approche en 6 étapes, détaillée dans `reports/synthese_resultats_publique.md` : cadrage et audit des données, EDA avec détection et correction de deux anomalies de saisie réelles, baselines simples avant modèles complexes (Ridge, tendance linéaire, régression logistique), comparaison chiffrée à un Gradient Boosting testé sur chaque volet (retenu dans 1 cas sur 4 seulement — la simplicité l'a emporté ailleurs, sur preuve et non par principe), interprétabilité SHAP systématique, et enfin dashboard + segmentation bonus.
+
+**Limite assumée :** échantillon restreint (55 localités, 20 semaines de suivi). L'objectif est de démontrer une méthodologie rigoureuse — baseline, validation temporelle, métriques métier, interprétabilité — appliquée à un cas réel, pas d'atteindre une précision de niveau production.
+
+## Stack technique
+
+Python · pandas · scikit-learn (Ridge, Gradient Boosting, régression logistique, K-Means) · SHAP · Streamlit · matplotlib.

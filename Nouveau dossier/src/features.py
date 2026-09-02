@@ -77,22 +77,13 @@ def build_table_ressources_detail(sheets: dict[str, pd.DataFrame]) -> pd.DataFra
     # Reste à livrer (cible naturelle du Modèle A), jamais négatif par construction
     table["Quantite_Restante"] = (table["Qte_Prevue"] - table["Qte_Realisee"]).clip(lower=0)
 
-    # Nombre d'anomalies signalées, au grain LOCALITÉ (et non Localité x Tâche).
-    # Correction apportée lors de l'EDA du Jour 2 : les désignations de
-    # `Anomalies_Taches` ne correspondent à AUCUNE ligne de `Objectifs` (0/6
-    # correspondances vérifiées sur Localité x Tâche x Désignation) — ces
-    # anomalies signalent des matériels livrés hors plan (substitution non
-    # prévue), pas un écart sur une ligne planifiée précise. Les rattacher à
-    # une tâche précise via un join (Localité, Tâche) les propageait à tort
-    # sur TOUTES les lignes matériel de cette tâche (ex. 1 anomalie
-    # devenait 4 lignes "à True"). Le signal fiable est donc : "cette
-    # localité a eu N anomalies terrain", répété sur toutes ses lignes —
-    # au même titre que les colonnes d'avancement de la localité.
-    anomalies_localite = (
-        sheets["Anomalies_Taches"].groupby("ID_Localite").size()
-        .rename("Nb_Anomalies_Signalees").reset_index()
-    )
-    table = table.merge(anomalies_localite, on="ID_Localite", how="left")
+    # Nombre d'anomalies signalées pour cette localité x tâche (signal de risque)
+    anomalies = sheets["Anomalies_Taches"].groupby(["ID_Localite", "Tache"]).size()
+    anomalies = anomalies.rename("Nb_Anomalies_Signalees").reset_index()
+    table = table.merge(
+        anomalies, left_on=["ID_Localite", "ID_Tache"],
+        right_on=["ID_Localite", "Tache"], how="left"
+    ).drop(columns=["Tache"])
     table["Nb_Anomalies_Signalees"] = table["Nb_Anomalies_Signalees"].fillna(0).astype(int)
 
     colonnes_finales = [
@@ -139,39 +130,12 @@ def build_table_ressources_temporelle(sheets: dict[str, pd.DataFrame]) -> pd.Dat
         .sort_values(["ID_Localite", "ID_Tache", "Date"])
     )
 
-    # Rattacher la quantité prévue AVANT le cumul, pour pouvoir filtrer les
-    # saisies journalières implausibles (voir note ci-dessous).
-    quotidien = quotidien.merge(qte_prevue_tache, on=["ID_Localite", "ID_Tache"], how="left")
-
-    # Garde-fou détecté lors de l'EDA du Jour 2 : certaines corrections
-    # "🎯 Cumul total à date" produisent un delta net aberrant — ex.
-    # ALI_Kan_03 / P2AE_Fouille_BT reçoit le 09/05/2026 une correction de
-    # -189, alors que la quantité TOTALE prévue pour cette tâche n'est que
-    # de 34 (soit -556 % du plan en une seule saisie). Ce n'est pas une
-    # réalité de terrain plausible (une tranchée ne se "dé-creuse" pas de
-    # 189 mètres), mais un artefact de ressaisie côté application terrain.
-    # Règle retenue, simple et vérifiable : toute saisie quotidienne dont
-    # la valeur absolue dépasse la quantité totale prévue de la tâche est
-    # considérée comme aberrante et neutralisée (mise à 0) plutôt que
-    # d'être laissée corrompre irréversiblement tout le cumul reconstruit
-    # à partir de cette date (effet de bord d'un cumsum()).
-    quotidien["Saisie_Aberrante_Neutralisee"] = (
-        quotidien["Quantite_Nette_Jour"].abs() > quotidien["Qte_Prevue_Tache"]
-    )
-    quotidien.loc[quotidien["Saisie_Aberrante_Neutralisee"], "Quantite_Nette_Jour"] = 0.0
-
     # Cumul réalisé dans le temps, par (localité, tâche)
     quotidien["Quantite_Cumulee_Realisee"] = (
         quotidien.groupby(["ID_Localite", "ID_Tache"])["Quantite_Nette_Jour"].cumsum()
     )
-    # Garde-fou complémentaire : un cumul reconstruit ne devrait jamais être
-    # négatif (quantité de travaux réalisés). S'il l'est malgré le filtre
-    # ci-dessus (petites corrections successives légitimes mais mal
-    # ordonnées), on le ramène à 0 plutôt que de propager une valeur
-    # physiquement impossible.
-    quotidien["Quantite_Cumulee_Realisee"] = quotidien["Quantite_Cumulee_Realisee"].clip(lower=0)
 
-    table = quotidien
+    table = quotidien.merge(qte_prevue_tache, on=["ID_Localite", "ID_Tache"], how="left")
     table["Taux_Realisation_Tache"] = (
         table["Quantite_Cumulee_Realisee"] / table["Qte_Prevue_Tache"]
     ).clip(upper=1.5)  # tolère un léger dépassement mais signale toute valeur aberrante
@@ -192,7 +156,6 @@ def build_table_ressources_temporelle(sheets: dict[str, pd.DataFrame]) -> pd.Dat
         "Jours_Ecoules_Depuis_Debut_Chantier",
         "Quantite_Nette_Jour", "Quantite_Cumulee_Realisee",
         "Qte_Prevue_Tache", "Quantite_Restante_Tache", "Taux_Realisation_Tache",
-        "Saisie_Aberrante_Neutralisee",
     ]
     return table[colonnes_finales].reset_index(drop=True)
 
