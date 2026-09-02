@@ -1,0 +1,111 @@
+Cle,Valeur
+Geo_Config|f64fbc641|Nom_Geo_1,ATACORA
+Geo_Config|f64fbc641|Nom_Geo_2,Natitingou
+Geo_Config|c3a68e3f1|Nom_Geo_1,ALIBORI
+Geo_Config|c3a68e3f1|Nom_Geo_2,Gogounou
+Geo_Config|2ec17c4d1|Nom_Geo_1,ALIBORI
+Geo_Config|2ec17c4d1|Nom_Geo_2,Kandi
+Geo_Config|215bc1671|Nom_Geo_1,DONGA
+Geo_Config|215bc1671|Nom_Geo_2,Djougou
+Geo_Config|9c6af0a41|Nom_Geo_1,DONGA
+Geo_Config|9c6af0a41|Nom_Geo_2,Ouaké
+Geo_Config|526229bb1|Nom_Geo_1,DONGA
+Geo_Config|526229bb1|Nom_Geo_2,Bassila
+Geo_Config|a9ef7a981|Nom_Geo_1,BORGOU
+Geo_Config|a9ef7a981|Nom_Geo_2,Parakou
+Geo_Config|29ef61f51|Nom_Geo_1,BORGOU
+Geo_Config|29ef61f51|Nom_Geo_2,N'Dali
+Geo_Config|e9e0a2281|Nom_Geo_1,BORGOU
+Geo_Config|e9e0a2281|Nom_Geo_2,Tchaourou
+Localités|DON_Bas_01|Localite,Partago
+Localités|DON_Bas_02|Localite,Oké-Igboélé
+Localités|DON_Bas_03|Localite,Akaradè
+Localités|DON_Bas_04|Localite,Tchimbéri
+Localités|DON_Djo_01|Localite,Founga
+Localités|DON_Djo_02|Localite,Alfa-Kpara
+Localités|DON_Djo_03|Localite,Vanhoui
+Localités|DON_Djo_04|Localite,Nagatchori
+Localités|DON_Djo_05|Localite,Danogou
+Localités|DON_Oua_01|Localite,Bohomdo
+Localités|DON_Oua_02|Localite,Komtcha
+Localités|DON_Oua_03|Localite,Itchodè
+Localités|DON_Oua_04|Localite,Talina
+Localités|DON_Oua_05|Localite,Trouncare Bas
+Localités|ALI_Gog_01|Localite,Wara
+Localités|ALI_Gog_02|Localite,Bagou-Sinkparou
+Localités|ALI_Gog_03|Localite,Bagou-Yankpanou
+Localités|ALI_Gog_04|Localite,Sori-Borowanrou
+Localités|ALI_Gog_05|Localite,Sori-Kpankpanrou
+Localités|ALI_Kan_01|Localite,Kandi-fô
+Localités|ALI_Kan_02|Localite,Albarika
+Localités|ALI_Kan_03|Localite,Kéféré-Senté
+Localités|ALI_Kan_04|Localite,Ganssoso-Gbiga
+Localités|ALI_Kan_05|Localite,Soundou
+Localités|ALI_Kan_06|Localite,Fafa
+Localités|ATA_Nat_01|Localite,Kotopounga
+Localités|ATA_Nat_02|Localite,Winkè
+Localités|ATA_Nat_03|Localite,Yimporima
+Localités|ATA_Nat_04|Localite,Kantaborifa
+Localités|ATA_Nat_05|Localite,Ouroubouga
+Localités|ATA_Nat_06|Localite,Perma-centre
+Localités|ATA_Nat_07|Localite,Boriyouré
+Localités|ATA_Nat_08|Localite,Ouroubonna
+Localités|ATA_Nat_09|Localite,Dassakaté
+Localités|ATA_Nat_10|Localite,Yokossi
+Localités|ATA_Nat_11|Localite,Tchrimina
+Localités|ATA_Nat_12|Localite,Kantchagoutamou
+Localités|ATA_Nat_13|Localite,Sountchirantikou
+Localités|ATA_Nat_14|Localite,Sossouna
+Localités|BOR_Par_01|Localite,Assagbinin-Baka
+Localités|BOR_Par_02|Localite,Banikani-Rose-croix
+Localités|BOR_Par_03|Localite,Zongo
+Localités|BOR_Par_04|Localite,Guerma
+Localités|BOR_Par_05|Localite,Bahmora
+Localités|BOR_Par_06|Localite,Bawé
+Localités|BOR_Par_07|Localite,Thian
+Localités|BOR_Par_08|Localite,Kpérou-Guéra
+Localités|BOR_Par_09|Localite,Okédama
+Localités|BOR_Dal_01|Localite,Yankoï
+Localités|BOR_Dal_02|Localite,Tounré
+Localités|BOR_Dal_03|Localite,Komiguéa
+Localités|BOR_Tcha_01|Localite,Kpakpanin
+Localités|BOR_Tcha_02|Localite,Sakana-Kpéba
+Localités|BOR_Tcha_03|Localite,Kpessou
+Localités|BOR_Tcha_04|Localite,Barérou
+Categories_Taches|g64fbc641|Categorie,Travaux HTA
+Categories_Taches|b3a68e3f1|Categorie,Travaux BT
+Categories_Taches|3ec17c4d1|Categorie,Global
+Type_Travaux|e64fbc641|Type_Travaux,Implantation
+Type_Travaux|a3a68e3f1|Type_Travaux,Déroulage
+Type_Travaux|1ec17c4d1|Type_Travaux,Equipement
+Type_Travaux|315bc1671|Type_Travaux,Implantation
+Type_Travaux|8c6af0a41|Type_Travaux,Déroulage
+Type_Travaux|426229bb1|Type_Travaux,Equipement
+Catalogue_Materiel|f03cfc0b|Designation,Fouille réseau haute tension
+Catalogue_Materiel|e221b25e|Designation,Fouille réseau basse tension
+Catalogue_Materiel|26e8ec03|Designation,PBA 11C650
+Catalogue_Materiel|058e9b6a|Designation,PBA 11A1250
+Catalogue_Materiel|46cfa5f8|Designation,PBA 12A800
+Catalogue_Materiel|e290ece0|Designation,PBA 12A1250
+Catalogue_Materiel|cd39f595|Designation,PBA 13A400
+Catalogue_Materiel|d6344558|Designation,PBA 13C800
+Catalogue_Materiel|50dc40e9|Designation,PBA 13C1250
+Catalogue_Materiel|ffbf33ef|Designation,PBA 14A1000
+Catalogue_Materiel|f74fbc64|Designation,PBA 14C1000
+Catalogue_Materiel|c0a68e3f|Designation,PBA 14C1250
+Catalogue_Materiel|2ec17c4d|Designation,PBA 9A200
+Catalogue_Materiel|215ac167|Designation,PBA 9A650
+Catalogue_Materiel|9c6af0a4|Designation,PBA 9C650
+Catalogue_Materiel|526229bb|Designation,PBA 9C800
+Catalogue_Materiel|a99f7a98|Designation,PBA 9C1000
+Catalogue_Materiel|29ef61f5|Designation,PBA 11C650
+Catalogue_Materiel|e9e0a228|Designation,ASTER 54mm²
+Catalogue_Materiel|630f858d|Designation,ASTER 75mm²
+Catalogue_Materiel|59dc5a38|Designation,PRC 70mm²
+Catalogue_Materiel|8e6b4946|Designation,PRC 50mm²
+Catalogue_Materiel|21f4f4d7|Designation,IACM
+Catalogue_Materiel|a4425df9|Designation,Point Double DMT-CC
+Catalogue_Materiel|8ae558c8|Designation,Transformateur 160 kVA
+Catalogue_Materiel|152ada8c|Designation,Transformateur 100 kVA
+Catalogue_Materiel|fbeef696|Designation,EP
+Catalogue_Materiel|002f1a3d|Designation,Mise à la terre

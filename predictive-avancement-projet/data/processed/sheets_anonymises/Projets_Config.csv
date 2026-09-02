@@ -1,0 +1,2 @@
+ID_Projet,Nom_Projet,Client,Pays,Nom_Geo_1,Nom_Geo_2,Date_Debut_Projet,Date_Fin_Projet,Actif,Roles_Destinataires_Alertes,Seuil_Inactivite_Jours
+P2AE,Projet d'Augmentation et d'Accès à l'Electricité,SBEE,Bénin,Département,Commune,2025-01-01,2026-06-17,True,"Chef de Mission, Admin",30

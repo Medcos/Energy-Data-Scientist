@@ -1,0 +1,40 @@
+ID_Journal,Date,ID_Projet,ID_Geo,Nom_Geo_1,Nom_Geo_2,ID_Localite,Effectif,Meteo,Observations,Activite_Principale,Photos,Difficultes,agent_id
+524522ff,2026-04-18,P2AE,,ATACORA,Natitingou,ATA_Nat_03,13.0,☀️ Ensoleillé,"Abattage de un arbre 🌲 
+Les normes de sécurité sont respectées",,Journal_Chantier_Images/524522ff.Photos.110325.jpg,Aucunes,agent_01
+a269e7a4,2026-04-23,P2AE,,ATACORA,Natitingou,ATA_Nat_03,10.0,☀️ Ensoleillé,Déroulage BT en cours d'un Canton long de 541m,,Journal_Chantier_Images/a269e7a4.Photos.084557.jpg,Aucune difficulté rencontrée à ce instant 9h45,agent_01
+1ed8725f,2026-04-27,P2AE,,ATACORA,Natitingou,ATA_Nat_13,2.0,☀️ Ensoleillé,Début de la réalisation des terre dans le département,Visite de chantier,Journal_Chantier_Images/1ed8725f.Photos.204907.jpg,,agent_01
+6d90eae4,2026-05-04,P2AE,,ALIBORI,Kandi,ALI_Kan_04,13.0,☀️ Ensoleillé,Le déroulage en cours,,Journal_Chantier_Images/6d90eae4.Photos.150808.jpg,2 agents LRA mis à l'écart pour non port de gants,agent_01
+ef21fcc4,2026-05-05,P2AE,,ALIBORI,Kandi,ALI_Kan_02,,⛅ Nuageux,Réception de fouilles,,Journal_Chantier_Images/ef21fcc4.Photos.162719.jpg,Aucune difficulté,agent_07
+0864916a,2026-05-05,P2AE,,ATACORA,Natitingou,ATA_Nat_03,15.0,🌧️ Pluvieux,,,,,agent_02
+53cfb492,2026-05-06,P2AE,,ALIBORI,Kandi,ALI_Kan_02,,☀️ Ensoleillé,"Réception de Câbles.
+Réception réalisée à la base vie de LRA",,Journal_Chantier_Images/53cfb492.Photos.135910.jpg,,agent_07
+525dc7e5,2026-05-08,P2AE,,ATACORA,Natitingou,ATA_Nat_03,,⛅ Nuageux,,,Journal_Chantier_Images/525dc7e5.Photos.185511.jpg,Arbre,agent_02
+129a0e64,2026-05-11,P2AE,,ATACORA,Natitingou,ATA_Nat_14,,🌧️ Pluvieux,,Deroulage,,Abatages d'arbres,agent_02
+2c2e4291,2026-05-13,P2AE,,ALIBORI,Kandi,ALI_Kan_06,3.0,☀️ Ensoleillé,Les points de diamant sont pas encore terminé,Visite de chantier,Journal_Chantier_Images/2c2e4291.Photos.091718.jpg,,agent_07
+4e20c796,2026-05-13,P2AE,,ALIBORI,Kandi,ALI_Kan_04,10.0,☀️ Ensoleillé,,Déroulage Almelec 5410,Journal_Chantier_Images/4e20c796.Photos.094958.jpg,,agent_07
+489fdcb9,2026-05-13,P2AE,,ALIBORI,Kandi,ALI_Kan_04,,,,Réseau HTA tfo2,Journal_Chantier_Images/489fdcb9.Photos.095834.jpg,,agent_07
+a3b273c8,2026-05-13,P2AE,,ALIBORI,Kandi,ALI_Kan_01,,☀️ Ensoleillé,Réseau HTA déroulé,Visite,Journal_Chantier_Images/a3b273c8.Photos.101239.jpg,,agent_07
+a6f9afc3,2026-05-14,P2AE,,ALIBORI,Kandi,ALI_Kan_02,2.0,☀️ Ensoleillé,2 fouilles dont l'implantation nécessite un massif spécial. Il s'agit des fouilles des PBA 185A et PBA 185B,Réception de fouilles,Journal_Chantier_Images/a6f9afc3.Photos.162054.jpg,,agent_07
+27e09a49,2026-05-14,P2AE,,ALIBORI,Kandi,ALI_Kan_03,3.0,☀️ Ensoleillé,,Réception de fouilles,Journal_Chantier_Images/27e09a49.Photos.162202.jpg,,agent_07
+cc4a470e,2026-05-15,P2AE,,ALIBORI,Gogounou,ALI_Gog_04,4.0,☀️ Ensoleillé,32 fouilles sont ouvertes,Visite d'inspection des fouilles ouvertes,Journal_Chantier_Images/cc4a470e.Photos.085546.jpg,,agent_01
+2bde43a8,2026-05-15,P2AE,,ALIBORI,Gogounou,ALI_Gog_05,4.0,☀️ Ensoleillé,23 dont 18 fouilles BT et 05 MT sont ouvertes,Visite d'inspection des fouilles ouvertes,Journal_Chantier_Images/2bde43a8.Photos.090534.jpg,,agent_01
+baee1089,2026-05-15,P2AE,,ALIBORI,Gogounou,ALI_Gog_01,4.0,☀️ Ensoleillé,"14 fouilles BT ouvertes.
+Ces fouilles sont à curer car elles sont quasi refermées",Visite d'inspection des fouilles ouvertes,Journal_Chantier_Images/baee1089.Photos.100201.jpg,,agent_01
+b9500264,2026-05-15,P2AE,,ALIBORI,Kandi,ALI_Kan_05,,☀️ Ensoleillé,,Vérification de l'effectivité de déroulage de la HTA,Journal_Chantier_Images/b9500264.Photos.153358.jpg,,agent_07
+P2AE-Jrl-65824c14,2026-06-03,P2AE,,ATACORA,Natitingou,ATA_Nat_08,,,,Pose armement HTA,Journal_Chantier_Images/P2AE-Jrl-65824c14.Photos.205423.jpg,,agent_02
+P2AE-Jrl-b708f5cd,2026-06-03,P2AE,,ATACORA,Natitingou,ATA_Nat_11,,,,Deroulage HTA,Journal_Chantier_Images/P2AE-Jrl-b708f5cd.Photos.205518.jpg,,agent_02
+P2AE-Jrl-2464bdab,2026-06-08,P2AE,,ATACORA,Natitingou,ATA_Nat_05,,,,Travaux d'abattage,Journal_Chantier_Images/P2AE-Jrl-2464bdab.Photos.201932.jpg,,agent_02
+P2AE-Jrl-c823e57e,2026-06-08,P2AE,,ATACORA,Natitingou,ATA_Nat_05,,,,Travaux d'élagage,Journal_Chantier_Images/P2AE-Jrl-c823e57e.Photos.202002.jpg,,agent_02
+P2AE-Jrl-b902b2ac,2026-06-20,P2AE,,ATACORA,Natitingou,ATA_Nat_05,7.0,🌧️ Pluvieux,,Déchargements des transformateurs et lanternes livrés,Journal_Chantier_Images/P2AE-Jrl-b902b2ac.Photos.181718.jpg,Aucune,agent_02
+P2AE-Jrl-22ed6c43,2026-06-20,P2AE,,ATACORA,Natitingou,ATA_Nat_04,8.0,🌧️ Pluvieux,,Déchargements lanternes,Journal_Chantier_Images/P2AE-Jrl-22ed6c43.Photos.181827.jpg,,agent_02
+P2AE-Jrl-a2f1ff11,2026-06-17,P2AE,,BORGOU,Parakou,BOR_Par_09,,☀️ Ensoleillé,Finition de point de diamant mal réalisée,Inspection des points de diamant,Journal_Chantier_Images/P2AE-Jrl-a2f1ff11.Photos.103232.jpg,,agent_01
+P2AE-Jrl-86fa299e,2026-06-20,P2AE,,BORGOU,Parakou,BOR_Par_09,,☀️ Ensoleillé,Point de diamant corrigé,Inspection de Point de diamant,Journal_Chantier_Images/P2AE-Jrl-86fa299e.Photos.103516.jpg,,agent_01
+P2AE-Jrl-79794e9b,2026-07-06,P2AE,,BORGOU,Parakou,BOR_Par_02,2.0,☀️ Ensoleillé,Déroulage du réseau fibre de la structure SBIN sur les PBA,Découverte de LRA,Journal_Chantier_Images/P2AE-Jrl-79794e9b.Photos.233333.jpg,,agent_01
+P2AE-Jrl-fbaa0f56,2026-07-07,P2AE,,ALIBORI,Kandi,ALI_Kan_04,,,,Visite de la localité,Journal_Chantier_Images/P2AE-Jrl-fbaa0f56.Photos.084729.jpg,,agent_01
+P2AE-Jrl-c81f7b16,2026-07-07,P2AE,,ALIBORI,Kandi,ALI_Kan_02,20.0,☀️ Ensoleillé,IACM a déplacer,Visite de chantier avec UGP et LRA,Journal_Chantier_Images/P2AE-Jrl-c81f7b16.Photos.111029.jpg,La phase HTA supplombe une maison,agent_01
+P2AE-Jrl-09681bce,2026-07-07,P2AE,,ALIBORI,Gogounou,ALI_Gog_04,20.0,☀️ Ensoleillé,Observation des tfos,Visite de chantier avec UGP,Journal_Chantier_Images/P2AE-Jrl-09681bce.Photos.134919.jpg,,agent_01
+P2AE-Jrl-1981a239,2026-07-07,P2AE,,ALIBORI,Gogounou,ALI_Gog_04,20.0,☀️ Ensoleillé,Déroulage réseau HTA,Visite de chantier avec UGP,Journal_Chantier_Images/P2AE-Jrl-1981a239.Photos.140246.jpg,,agent_01
+P2AE-Jrl-e3ae189f,2026-07-08,P2AE,,BORGOU,Parakou,BOR_Par_03,24.0,☀️ Ensoleillé,"Présence UGP, MC et LRA",Réunion mensuelle du mois de Juin a la base vie de LRA,Journal_Chantier_Images/P2AE-Jrl-e3ae189f.Photos.105745.jpg,,agent_01
+P2AE-Jrl-6825fe1d,2026-08-15,P2AE,f64fbc641,ATACORA,Natitingou,ATA_Nat_13,,⛅ Nuageux,,Pose de coffret EP,Journal_Chantier_Images/P2AE-Jrl-6825fe1d.Photos.230322.jpg,,agent_01
+P2AE-Jrl-b81f1cbc,2026-08-01,P2AE,f64fbc641,ATACORA,Natitingou,ATA_Nat_03,,☀️ Ensoleillé,Échantillon validé par Dr Alexis,Réservation de terre,Journal_Chantier_Images/P2AE-Jrl-b81f1cbc.Photos.230910.jpg,,agent_01
+P2AE-Jrl-c496407c,2026-08-17,P2AE,f64fbc641,ATACORA,Natitingou,ATA_Nat_02,,☀️ Ensoleillé,,Pose de EP,Journal_Chantier_Images/P2AE-Jrl-c496407c.Photos.200215.jpg,Aucunes,agent_01

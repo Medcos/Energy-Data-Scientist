@@ -1,0 +1,14 @@
+ID_Tache,ID_Projet,Poids,Nom_Tache,Categorie,Description,Actif
+P2AE_Fouille_HTA,P2AE,0.0333,Fouille_HTA,Travaux HTA,Fouille réseau haute tension,True
+P2AE_PBA_HTA,P2AE,0.3,PBA_HTA,Travaux HTA,Poteaux Béton Armés HTA,True
+P2AE_Cable_HTA,P2AE,0.3333,Cable_HTA,Travaux HTA,Câbles haute tension,True
+P2AE_DMT,P2AE,0.0833,DMT-CC,Travaux HTA,Dispositif de Montage de Téléconduite,True
+P2AE_IACM,P2AE,0.0833,IACM,Travaux HTA,Interrupteur aérien à commande manuelle,True
+P2AE_TFO,P2AE,0.1667,TFO,Travaux HTA,Transformateur,True
+P2AE_Fouille_BT,P2AE,0.0467,Fouille_BT,Travaux BT,Fouille réseau basse tension,True
+P2AE_PBA_BT,P2AE,0.42,PBA_BT,Travaux BT,Poteaux Béton Armés  BT,True
+P2AE_Cable_BT,P2AE,0.3111,Cable_BT,Travaux BT,Câbles basse tension,True
+P2AE_EP,P2AE,0.1556,EP,Travaux BT,Éclairage public,True
+P2AE_Terre,P2AE,0.0667,Terre,Travaux BT,Mise à la terre,True
+P2AE_Coeff_HTA,P2AE,0.438,Coeff_HTA,Global,Coefficient HTA dans avancement global,True
+P2AE_Coeff_BT,P2AE,0.562,Coeff_BT,Global,Coefficient BT dans avancement global,True

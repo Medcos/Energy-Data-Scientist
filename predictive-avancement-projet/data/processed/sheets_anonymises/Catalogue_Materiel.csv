@@ -1,0 +1,29 @@
+ID_Materiel,ID_Projet,ID_Tache,Designation,Categorie,Type_Travaux,Unite,Actif
+f03cfc0b,P2AE,P2AE_Fouille_HTA,Fouille réseau haute tension,Travaux HTA,Implantation,U,True
+e221b25e,P2AE,P2AE_Fouille_BT,Fouille réseau basse tension,Travaux BT,Implantation,U,True
+26e8ec03,P2AE,P2AE_PBA_HTA,PBA 11C650,Travaux HTA,Implantation,U,True
+058e9b6a,P2AE,P2AE_PBA_HTA,PBA 11A1250,Travaux HTA,Implantation,U,True
+46cfa5f8,P2AE,P2AE_PBA_HTA,PBA 12A800,Travaux HTA,Implantation,U,True
+e290ece0,P2AE,P2AE_PBA_HTA,PBA 12A1250,Travaux HTA,Implantation,U,True
+cd39f595,P2AE,P2AE_PBA_HTA,PBA 13A400,Travaux HTA,Implantation,U,True
+d6344558,P2AE,P2AE_PBA_HTA,PBA 13C800,Travaux HTA,Implantation,U,True
+50dc40e9,P2AE,P2AE_PBA_HTA,PBA 13C1250,Travaux HTA,Implantation,U,True
+ffbf33ef,P2AE,P2AE_PBA_HTA,PBA 14A1000,Travaux HTA,Implantation,U,True
+f74fbc64,P2AE,P2AE_PBA_HTA,PBA 14C1000,Travaux HTA,Implantation,U,True
+c0a68e3f,P2AE,P2AE_PBA_HTA,PBA 14C1250,Travaux HTA,Implantation,U,True
+2ec17c4d,P2AE,P2AE_PBA_BT,PBA 9A200,Travaux BT,Implantation,U,True
+215ac167,P2AE,P2AE_PBA_BT,PBA 9A650,Travaux BT,Implantation,U,True
+9c6af0a4,P2AE,P2AE_PBA_BT,PBA 9C650,Travaux BT,Implantation,U,True
+526229bb,P2AE,P2AE_PBA_BT,PBA 9C800,Travaux BT,Implantation,U,True
+a99f7a98,P2AE,P2AE_PBA_BT,PBA 9C1000,Travaux BT,Implantation,U,True
+29ef61f5,P2AE,P2AE_PBA_BT,PBA 11C650,Travaux BT,Implantation,U,True
+e9e0a228,P2AE,P2AE_Cable_HTA,ASTER 54mm²,Travaux HTA,Déroulage,m,True
+630f858d,P2AE,P2AE_Cable_HTA,ASTER 75mm²,Travaux HTA,Déroulage,m,True
+59dc5a38,P2AE,P2AE_Cable_BT,PRC 70mm²,Travaux BT,Déroulage,m,True
+8e6b4946,P2AE,P2AE_Cable_BT,PRC 50mm²,Travaux BT,Déroulage,m,True
+21f4f4d7,P2AE,P2AE_IACM,IACM,Travaux HTA,Equipement,U,True
+a4425df9,P2AE,P2AE_DMT,Point Double DMT-CC,Travaux HTA,Equipement,U,True
+8ae558c8,P2AE,P2AE_TFO,Transformateur 160 kVA,Travaux HTA,Equipement,U,True
+152ada8c,P2AE,P2AE_TFO,Transformateur 100 kVA,Travaux HTA,Equipement,U,True
+fbeef696,P2AE,P2AE_EP,EP,Travaux BT,Equipement,U,True
+002f1a3d,P2AE,P2AE_Terre,Mise à la terre,Travaux BT,Equipement,U,True

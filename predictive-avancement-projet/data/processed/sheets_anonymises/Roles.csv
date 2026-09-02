@@ -1,0 +1,8 @@
+agent_id,Role,Actif
+agent_01,Admin,True
+agent_02,Superviseur,True
+agent_03,Superviseur,False
+agent_04,Superviseur,True
+agent_05,Superviseur,False
+agent_06,Chef de Mission,True
+agent_07,Superviseur,True

@@ -1,0 +1,8 @@
+agent_id,Date_Debut,Date_Fin,Choix_Geo_1,Choix_Geo_2,Choix_Localite,Choix_Tache,Choix_Materiel
+agent_01,2026-08-17,2026-08-23,DONGA,,,,
+agent_02,2026-07-24,2026-08-12,ATACORA,Natitingou,ATA_Nat_02,P2AE_PBA_HTA,PBA 13C800
+agent_03,2026-05-11,2026-05-17,,,,,
+agent_04,2026-05-11,2026-05-17,,,,,
+agent_05,2026-05-11,2026-05-17,,,,,
+agent_06,2026-05-11,2026-05-17,,,,,
+agent_07,2026-01-05,2026-07-01,ATACORA,Natitingou,ATA_Nat_13,P2AE_Cable_BT,
