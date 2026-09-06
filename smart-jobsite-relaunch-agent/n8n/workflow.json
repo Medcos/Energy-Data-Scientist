@@ -1,0 +1,157 @@
+{
+  "id": "fb50a56c",
+  "name": "Relance de chantier — hebdomadaire",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "trigger",
+      "name": "Schedule Trigger (lundi 8h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "/data/sample_report_email.txt",
+        "options": {}
+      },
+      "id": "read_email",
+      "name": "Lire email simulé",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nreturn [{\n  json: {\n    email_brut: buffer.toString('utf-8'),\n    date_du_jour: '2026-09-07'\n  }\n}];"
+      },
+      "id": "build_payload",
+      "name": "Construire la requête",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/traiter-rapport-hebdomadaire",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "call_api",
+      "name": "Appeler l'agent (API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const resultats = $json.resultats || [];\nconst sections = resultats.map(r => r.section_rapport || `### ${r.nom_localite_brut || '(localité non résolue)'} — à vérifier\\n\\n${(r.erreurs || []).map(e => `- ${e}`).join('\\n')}`).join('\\n\\n---\\n\\n');\nconst rapport = `# Rapport hebdomadaire — ${resultats.length} localité(s) traitée(s)\\n\\n${sections}`;\nconst binary = await this.helpers.prepareBinaryData(Buffer.from(rapport, 'utf-8'), 'rapport.md', 'text/markdown');\nreturn [{ json: $json, binary: { data: binary } }];"
+      },
+      "id": "prepare_write",
+      "name": "Préparer le fichier",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/out/rapport_hebdomadaire_2026-09-07.md",
+        "options": {}
+      },
+      "id": "write_report",
+      "name": "Écrire le rapport",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger (lundi 8h)": {
+      "main": [
+        [
+          {
+            "node": "Lire email simulé",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lire email simulé": {
+      "main": [
+        [
+          {
+            "node": "Construire la requête",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construire la requête": {
+      "main": [
+        [
+          {
+            "node": "Appeler l'agent (API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Appeler l'agent (API)": {
+      "main": [
+        [
+          {
+            "node": "Préparer le fichier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer le fichier": {
+      "main": [
+        [
+          {
+            "node": "Écrire le rapport",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
