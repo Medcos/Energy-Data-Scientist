@@ -1,0 +1,2 @@
+ID_Projet,Nom_Projet,Client,Pays,Date_Debut_Projet,Date_Fin_Projet,Actif,Roles_Destinataires_Alertes,Seuil_Inactivite_App_Jours,Seuil_Rapport_Hebdomadaire_Jours
+DEMO_PROJ_01,Programme démo de densification réseau,Opérateur démo réseau,Bénin,2025-11-17,2026-12-31,True,Chef_de_Mission;Admin,30,90

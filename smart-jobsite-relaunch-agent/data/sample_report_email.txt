@@ -1,0 +1,16 @@
+Objet : [Rapport hebdomadaire] Chantiers sans activité depuis plus de 3 mois
+
+Bonjour,
+
+Voici la liste des localités n'ayant connu aucune activité de chantier
+depuis plus de 3 mois, à la date du 31/08/2026 :
+
+  - Site-09 (Commune_A, ALIBORI)
+  - Site_23 (Commune_G, DONGA)
+  - Site_35 (Commune_D, ALIBORI)
+  - Site_39 (Commune_F, DONGA)
+  - Site_45 (Commune_B, DONGA)
+
+Merci de relancer les équipes concernées.
+
+-- Rapport automatique Electrack Pro (démo)

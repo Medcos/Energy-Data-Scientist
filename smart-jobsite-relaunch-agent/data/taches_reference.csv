@@ -1,0 +1,12 @@
+ID_Tache,Nom_Tache,Categorie,Poids,Phase_Planning
+TASK_Fouille_HTA,Fouille_HTA,Travaux HTA,0.0333,Piquetage_Fouille
+TASK_PBA_HTA,PBA_HTA,Travaux HTA,0.3,Implantation_Supports
+TASK_Cable_HTA,Cable_HTA,Travaux HTA,0.3333,Deroulage_Cables
+TASK_DMT,DMT-CC,Travaux HTA,0.0833,Equipement_Poste
+TASK_IACM,IACM,Travaux HTA,0.0833,Equipement_Poste
+TASK_TFO,TFO,Travaux HTA,0.1667,Equipement_Poste
+TASK_Fouille_BT,Fouille_BT,Travaux BT,0.0467,Piquetage_Fouille
+TASK_PBA_BT,PBA_BT,Travaux BT,0.42,Implantation_Supports
+TASK_Cable_BT,Cable_BT,Travaux BT,0.3111,Deroulage_Cables
+TASK_EP,EP,Travaux BT,0.1556,Equipement_Poste
+TASK_Terre,Terre,Travaux BT,0.0667,Equipement_Poste
