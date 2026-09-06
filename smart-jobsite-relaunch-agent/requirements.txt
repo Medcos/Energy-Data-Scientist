@@ -1,0 +1,44 @@
+# requirements.txt — versions épinglées au Jour 5 (avant déploiement
+# Streamlit Cloud), sur les versions validées ensemble dans un environnement
+# de test propre (venv, cf. Jour 5) — 36 tests verts, app Streamlit rendue
+# sans exception sur ses 3 pages. Épinglage exact plutôt qu'un plancher
+# (>=) : leçon du projet précédent (predictive-maintenance-electrical-grid),
+# où un décalage de version scikit-learn entre l'environnement local et
+# Streamlit Cloud avait cassé le chargement d'un RobustScaler sérialisé.
+# Ici le risque équivalent porterait sur la sérialisation de l'état de
+# l'agent (pydantic/langgraph) — d'où l'épinglage strict sur ces deux-là en
+# particulier, étendu à tout le reste par cohérence.
+
+# --- Données & manipulation ---
+pandas==3.0.2
+numpy==2.4.4
+openpyxl==3.1.5  # lecture du fichier source réel (génération des données, usage auteur uniquement)
+
+# --- Agent LangGraph ---
+langgraph==1.2.11
+langgraph-checkpoint-sqlite==3.1.1
+langchain-core==1.6.1
+pydantic==2.13.3
+
+# --- Résolution de noms (fuzzy matching, section 5.2 de la spec) ---
+rapidfuzz==3.14.6
+
+# --- API ---
+fastapi==0.141.1
+uvicorn==0.46.0
+
+# --- Interface de démonstration (app/, Jour 5) ---
+streamlit==1.63.0
+plotly==7.0.0
+
+# --- Tests ---
+pytest==9.1.1
+httpx==0.28.1  # requis par fastapi.testclient.TestClient (tests/test_api.py) et streamlit.testing.v1.AppTest (tests/test_app_streamlit.py)
+
+# --- Utilitaires ---
+python-dotenv==1.2.2
+
+# --- Optionnel ---
+# anthropic  # seulement si ANTHROPIC_API_KEY est défini (agent/llm_extraction.py,
+# import différé) — non installé par défaut, jamais exercé dans les tests ni
+# dans la démo publique, qui utilise le repli déterministe.

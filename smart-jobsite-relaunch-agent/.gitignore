@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.sqlite-shm
+*.sqlite-wal
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+.DS_Store
+
+# État runtime n8n (pas du code source du repo)
+n8n_home/
+
+# Sorties générées par les runs locaux/démo (n8n écrit ici) — pas du code
+# source ; un exemple figé est conservé séparément dans docs/ pour le README.
+out/
+!out/.gitkeep
