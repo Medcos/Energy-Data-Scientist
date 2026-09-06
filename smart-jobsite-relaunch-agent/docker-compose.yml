@@ -1,0 +1,57 @@
+# docker-compose.yml — Jour 4 : lance en local, en une commande, l'API
+# (agent LangGraph exposé en HTTP) et n8n (orchestration du déclenchement
+# hebdomadaire), sur un même réseau Docker.
+#
+# Usage :
+#   docker compose up --build
+#   API      : http://localhost:8000/sante
+#   n8n (UI) : http://localhost:5678
+#
+# Pas de version épinglée pour l'image n8n à ce stade (cohérent avec
+# requirements.txt racine — épinglage définitif prévu au Jour 5).
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      # Données sources (CSV) en lecture seule.
+      - ./data:/app/data:ro
+      # Base de checkpoints versionnée (historique_cadence peuplé au Jour
+      # 3) — montée en lecture-écriture pour que les nouveaux runs
+      # continuent l'historique existant plutôt que d'en créer un autre.
+      - ./agent/checkpoints.sqlite:/app/agent/checkpoints.sqlite
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/sante')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_SECURE_COOKIE=false
+      # Par défaut n8n interdit tout accès fichier hors de ~/.n8n-files
+      # (SecurityConfig.restrictFileAccessTo) — sans cette variable, les
+      # nœuds "Lire email simulé" / "Écrire le rapport" échouent avec
+      # "Access to the file is not allowed.", vérifié en conditions réelles
+      # (n8n via npm, cf. n8n/README.md).
+      - N8N_RESTRICT_FILE_ACCESS_TO=/data;/out
+    volumes:
+      # Fichier email de démo, en lecture seule.
+      - ./data:/data:ro
+      # Rapport écrit par le workflow — lisible côté hôte après exécution.
+      - ./out:/out
+      # Persistance de la configuration/des workflows n8n entre redémarrages.
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  n8n_data:

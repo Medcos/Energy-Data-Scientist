@@ -1,0 +1,17 @@
+# api/requirements.txt — sous-ensemble de requirements.txt (racine) scopé
+# à ce que l'API a réellement besoin (pas streamlit/plotly, qui alourdiraient
+# et ralentiraient l'image Docker pour rien). Versions épinglées au Jour 5,
+# mêmes valeurs que requirements.txt racine — voir son en-tête pour le
+# pourquoi de l'épinglage exact.
+
+fastapi==0.141.1
+uvicorn==0.46.0
+pydantic==2.13.3
+
+pandas==3.0.2
+numpy==2.4.4
+rapidfuzz==3.14.6
+
+langgraph==1.2.11
+langgraph-checkpoint-sqlite==3.1.1
+langchain-core==1.6.1
