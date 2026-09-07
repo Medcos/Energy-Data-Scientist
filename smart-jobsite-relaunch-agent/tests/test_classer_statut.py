@@ -86,3 +86,30 @@ def test_statut_critique_prioritaire_sur_retard():
         semaines_restantes={"T1": -1.0, "T2": SEUIL_RETARD_SEMAINES},
     )
     assert nodes.classer_statut(state) == {"statut_alerte": "critique"}
+
+
+def test_statut_historique_avec_tache_sur_realisee_ne_force_pas_retard():
+    # Régression Jour 5 (post-déploiement) : une tâche en fort sur-réalisé
+    # dans l'historique (reste très négatif, ex. TASK_Cable_BT à Site_09 :
+    # -4879 — un écart de données du Jour 1) ne doit pas, à elle seule,
+    # déclencher "retard" pour une localité dont la cadence courante est par
+    # ailleurs tout à fait normale. Avant le correctif (reste_actionnable
+    # appliqué à cadence_moyenne_historique), cette tâche négative tirait la
+    # moyenne historique fortement en dessous de zéro, rendant
+    # `cadence > 1.5 * cadence_moyenne_historique` trivialement vrai.
+    state = AgentState(
+        reste_a_faire={"T1": 3.0},
+        semaines_restantes={"T1": SEUIL_RETARD_SEMAINES + 2},  # échéance confortable
+        cadence_recommandee={"T1": 1.0},  # cadence modeste, cohérente avec l'historique actionnable (1.0)
+        historique_cadence=[
+            HistoriqueCadenceEntry(
+                semaine="2026-08-17",
+                reste_a_faire={"T1": 1.0, "TASK_Cable_BT": -4879.0},
+            ),
+            HistoriqueCadenceEntry(
+                semaine="2026-08-24",
+                reste_a_faire={"T1": 1.0, "TASK_Cable_BT": -4879.0},
+            ),
+        ],
+    )
+    assert nodes.classer_statut(state) == {"statut_alerte": "normal"}

@@ -21,6 +21,21 @@ SEUIL_ECART_INACTIVITE_JOURS = 7
 SEUIL_RETARD_SEMAINES = 4
 
 
+def reste_actionnable(reste_a_faire: dict[str, float]) -> dict[str, float]:
+    """Filtre les tâches à reste <= 0 (terminées ou sur-réalisées — voir
+    generer_section_rapport, section 5.3 : "priorise les tâches ... avec un
+    reste à faire réel"). Extrait comme fonction partagée (Jour 5, correctif
+    post-déploiement) : la page Streamlit "Historique de cadence" sommait
+    initialement TOUTES les valeurs de reste_a_faire pour tracer sa courbe,
+    y compris les tâches en fort sur-réalisé (ex. Cable_BT à Site_09 :
+    reste = -4879, un écart de données du Jour 1 — 131 des 573 couples
+    tâche/localité du jeu de données ont un reste négatif). Le rapport texte
+    ne les a jamais montrées (déjà filtrées ici), mais le total agrégé de la
+    page les intégrait, rendant la courbe illisible. Cette fonction est
+    maintenant le seul endroit qui définit "reste actionnable"."""
+    return {tache: reste for tache, reste in reste_a_faire.items() if reste > 0}
+
+
 # ---------------------------------------------------------------------------
 # 1. extraction_localites
 # ---------------------------------------------------------------------------
@@ -225,11 +240,22 @@ def classer_statut(state: AgentState) -> dict:
     # data_access.lire_historique_cadence utilisé au Jour 2, qui renvoyait
     # toujours [] faute de persistance inter-runs ; ce stub reste défini
     # dans data_access.py comme fallback inutilisé.)
+    # Correctif Jour 5 (post-déploiement, cf. reste_actionnable ci-dessus) :
+    # ne moyenner que le reste ACTIONNABLE (> 0) de chaque semaine passée.
+    # Avant ce correctif, une tâche en fort sur-réalisé dans l'historique
+    # (reste très négatif — ex. TASK_Cable_BT à Site_09 : -4879) tirait
+    # cadence_moyenne_historique fortement en négatif, rendant
+    # `cadence > 1.5 * cadence_moyenne_historique` trivialement vrai pour
+    # quasiment n'importe quelle cadence positive — un "retard" pouvait donc
+    # être déclenché à tort, indépendamment de la performance réelle de la
+    # localité. Non observé en pratique jusqu'ici uniquement parce que les
+    # localités concernées déclenchaient déjà "critique" via a_du_critique
+    # (qui est prioritaire) — cf. test_classer_statut_historique_avec_tache_sur_realisee_ne_force_pas_retard.
     historique = state.historique_cadence
     cadence_moyenne_historique = None
     if historique:
         toutes_cadences = [
-            v for h in historique for v in h.reste_a_faire.values()
+            v for h in historique for v in reste_actionnable(h.reste_a_faire).values()
         ]
         if toutes_cadences:
             cadence_moyenne_historique = sum(toutes_cadences) / len(toutes_cadences)
@@ -294,11 +320,7 @@ def generer_section_rapport(state: AgentState) -> dict:
 
     # Priorise les tâches au poids le plus élevé (section 5.3), ne montre
     # que celles avec un reste à faire réel.
-    lignes_taches = [
-        (id_tache, reste)
-        for id_tache, reste in state.reste_a_faire.items()
-        if reste > 0
-    ]
+    lignes_taches = list(reste_actionnable(state.reste_a_faire).items())
     lignes_taches.sort(
         key=lambda t: taches_ref.loc[t[0], "Poids"] if t[0] in taches_ref.index else 0,
         reverse=True,

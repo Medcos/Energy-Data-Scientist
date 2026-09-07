@@ -18,13 +18,14 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from agent.nodes import reste_actionnable
 from agent_client import LOCALITES_GELEES_AVEC_HISTORIQUE, get_historique, lister_localites
 
 st.set_page_config(page_title="Historique de cadence", page_icon="📈", layout="wide")
 
 st.title("Historique de cadence")
 st.caption(
-    "Reste à faire (toutes tâches confondues) au fil des semaines déjà simulées ou "
+    "Reste à faire (tâches non terminées) au fil des semaines déjà simulées ou "
     "analysées pour une localité — persistant grâce au Checkpointer, pas recalculé "
     "depuis zéro à chaque appel."
 )
@@ -49,8 +50,19 @@ historique = get_historique(id_localite)
 if not historique:
     st.info(f"Aucun historique pour {id_localite} pour l'instant.", icon="ℹ️")
 else:
+    # reste_actionnable (agent/nodes.py) exclut les tâches à reste <= 0
+    # (terminées/sur-réalisées), même règle que generer_section_rapport pour
+    # la table du rapport. Bug corrigé après déploiement (Jour 5) : cette
+    # page sommait AVANT ce correctif toutes les valeurs sans filtrage, y
+    # compris les tâches en fort sur-réalisé (ex. Cable_BT à Site_09 :
+    # reste = -4879, un écart de données du Jour 1 — 131 des 573 couples
+    # tâche/localité du jeu de données ont un reste négatif). Le rapport
+    # texte ne les montre jamais, mais le total agrégé de cette page les
+    # intégrait, rendant la courbe illisible (Site_09 affichait ~-4753 au
+    # lieu de ~+340). Les valeurs négatives restent visibles et non
+    # modifiées dans "Détail par tâche" ci-dessous, pour transparence.
     lignes = [
-        {"semaine": h.semaine, "reste_total": sum(h.reste_a_faire.values())}
+        {"semaine": h.semaine, "reste_total": sum(reste_actionnable(h.reste_a_faire).values())}
         for h in historique
     ]
     df = pd.DataFrame(lignes)
@@ -60,7 +72,7 @@ else:
         y="reste_total",
         markers=True,
         title=f"{id_localite} — reste à faire total par semaine",
-        labels={"semaine": "Semaine", "reste_total": "Reste à faire (toutes tâches)"},
+        labels={"semaine": "Semaine", "reste_total": "Reste à faire (tâches non terminées)"},
     )
     st.plotly_chart(fig, width='stretch')
 
