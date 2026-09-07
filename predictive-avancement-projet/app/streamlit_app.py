@@ -25,7 +25,9 @@ import matplotlib.pyplot as plt
 # ----------------------------------------------------------------------------
 st.set_page_config(page_title="Rollout Forecast", page_icon="⚡", layout="wide")
 
-PUBLIC_MODE = os.environ.get("PUBLIC_MODE", "0") == "1"
+PUBLIC_MODE = os.environ.get(
+    "PUBLIC_MODE", os.environ.get("P2AE_PUBLIC_MODE", "0")
+) == "1"  # compat : Streamlit Cloud garde encore l'ancien nom de variable
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 if PUBLIC_MODE:
