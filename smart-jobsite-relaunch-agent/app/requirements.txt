@@ -1,0 +1,35 @@
+# app/requirements.txt — copie scopée de requirements.txt (racine), ajoutée
+# après le premier déploiement Streamlit Cloud (Jour 5, correctif).
+#
+# Cause du bug observé : Community Cloud cherche un fichier de dépendances
+# (1) dans le dossier de l'ENTRYPOINT (ici app/, car "Main file path" =
+# app/Accueil.py), PUIS (2) à la racine du dépôt GitHub — jamais dans un
+# dossier intermédiaire. Notre requirements.txt à la racine de
+# smart-jobsite-relaunch-agent/ n'est ni l'un ni l'autre quand ce dossier
+# est lui-même un sous-dossier d'un monorepo (cas de
+# Medcos/Energy-Data-Scientist) : Community Cloud est alors retombé sur le
+# requirements.txt de la RACINE DU MONOREPO (celui d'un autre projet
+# portfolio), d'où le ModuleNotFoundError sur rapidfuzz et plotly, absents
+# de ce fichier-là.
+#
+# Correctif : ce fichier, dans app/ (même dossier que Accueil.py), est
+# trouvé par Community Cloud AVANT tout fichier à la racine — peu importe
+# la profondeur du sous-dossier. Sous-ensemble de requirements.txt (racine)
+# scopé à ce que l'app Streamlit importe réellement (pas fastapi/uvicorn,
+# pas pytest/httpx — dépendances de l'API et des tests, pas de l'app ;
+# cf. api/requirements.txt pour la même logique côté API). Versions
+# identiques à requirements.txt (racine) — le maintenir à jour si celui-ci
+# change.
+
+pandas==3.0.2
+numpy==2.4.4
+
+langgraph==1.2.11
+langgraph-checkpoint-sqlite==3.1.1
+langchain-core==1.6.1
+pydantic==2.13.3
+
+rapidfuzz==3.14.6
+
+streamlit==1.63.0
+plotly==7.0.0
