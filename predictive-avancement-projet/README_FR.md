@@ -1,4 +1,4 @@
-# p2ae-rollout-forecast
+# predictive-avancement-projet
 
 Modélisation prédictive de l'avancement et de l'approvisionnement sur un chantier d'électrification rurale (SBEE Bénin, Afrique de l'Ouest, financement international) — 55 localités, 4 départements, échéance décembre 2026.
 
@@ -27,7 +27,7 @@ Ce dépôt contient des données **pseudonymisées** issues d'un projet réel fi
 
 ```bash
 pip install -r requirements.txt
-P2AE_PUBLIC_MODE=1 streamlit run app/streamlit_app.py
+PUBLIC_MODE=1 streamlit run app/streamlit_app.py
 ```
 
 Dashboard à 3 pages : Ressources, Avancement, Risques.
@@ -35,12 +35,12 @@ Dashboard à 3 pages : Ressources, Avancement, Risques.
 ## Structure du dépôt
 
 ```
-p2ae-rollout-forecast/
+predictive-avancement-projet/
 ├── README.md                     # version anglaise (par défaut)
 ├── README.fr.md                  # ce fichier
 ├── requirements.txt
 ├── app/
-│   └── streamlit_app.py          # dashboard 3 pages (mode public via P2AE_PUBLIC_MODE=1)
+│   └── streamlit_app.py          # dashboard 3 pages (mode public via PUBLIC_MODE=1)
 ├── src/
 │   ├── anonymize.py              # anonymisation PII + pseudonymisation localités/communes
 │   └── features.py               # construction des tables pivot

@@ -1,5 +1,5 @@
 """
-Construction des tables pivot P2AE — Jour 1.
+Construction des tables pivot — Jour 1.
 
 Décision de cadrage assumée (documentée dans le rapport d'audit) :
 La spécification initiale (section 4 du plan) visait une seule table au grain
@@ -25,7 +25,7 @@ import pandas as pd
 import numpy as np
 
 # Dates de chantier par département, lues sur le planning contractuel
-# LRA_P2AE_Phase1/Lot1 (lignes de synthèse 6.1 à 6.4 du Gantt).
+# (lignes de synthèse 6.1 à 6.4 du Gantt).
 GANTT_DEPARTEMENTS = {
     "ATACORA": {"debut": "2024-11-18", "fin_contractuelle": "2026-08-15"},
     "ALIBORI": {"debut": "2024-11-18", "fin_contractuelle": "2026-09-19"},

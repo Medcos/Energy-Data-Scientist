@@ -1,5 +1,5 @@
 """
-Dashboard P2AE Rollout Forecast — ElecTrack Pro
+Dashboard Rollout Forecast — ElecTrack Pro
 3 pages : Ressources (Modèle A), Avancement (Modèle B), Risques (Modèle C).
 
 Lancement local (données de travail réelles) :
@@ -7,8 +7,8 @@ Lancement local (données de travail réelles) :
 
 Lancement en mode public (données/modèles pseudonymisés, pour déploiement
 Streamlit Cloud — voir décision D5, reports/cadrage_jour1.md) :
-    P2AE_PUBLIC_MODE=1 streamlit run app/streamlit_app.py
-Sur Streamlit Cloud : définir la variable d'environnement P2AE_PUBLIC_MODE=1
+    PUBLIC_MODE=1 streamlit run app/streamlit_app.py
+Sur Streamlit Cloud : définir la variable d'environnement PUBLIC_MODE=1
 dans les paramètres avancés de l'app (Settings > Secrets ou Environment).
 """
 import os
@@ -23,9 +23,9 @@ import matplotlib.pyplot as plt
 # ----------------------------------------------------------------------------
 # Configuration générale
 # ----------------------------------------------------------------------------
-st.set_page_config(page_title="P2AE Rollout Forecast", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="Rollout Forecast", page_icon="⚡", layout="wide")
 
-PUBLIC_MODE = os.environ.get("P2AE_PUBLIC_MODE", "0") == "1"
+PUBLIC_MODE = os.environ.get("PUBLIC_MODE", "0") == "1"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 if PUBLIC_MODE:
@@ -113,8 +113,8 @@ table_localites = build_table_localites()
 # ----------------------------------------------------------------------------
 # Barre latérale — navigation
 # ----------------------------------------------------------------------------
-st.sidebar.title("⚡ P2AE Rollout Forecast")
-st.sidebar.caption("SBEE Bénin · Phase 1, Lot 1 · ElecTrack Pro")
+st.sidebar.title("⚡ Rollout Forecast")
+st.sidebar.caption("SBEE Bénin")
 page = st.sidebar.radio("Page", ["🧱 Ressources", "📈 Avancement", "⚠️ Risques"])
 st.sidebar.markdown("---")
 st.sidebar.metric("Localités suivies", "55")
@@ -129,7 +129,7 @@ if PUBLIC_MODE:
 else:
     st.sidebar.caption(
         "⚠️ Mode interne — données de travail réelles (noms de localités/communes). "
-        "Ne pas partager publiquement sans activer P2AE_PUBLIC_MODE=1 (décision D5)."
+        "Ne pas partager publiquement sans activer PUBLIC_MODE=1 (décision D5)."
     )
 
 
@@ -152,6 +152,10 @@ def page_ressources():
     commune = sub["Commune"].iloc[0]
     st.markdown(f"**Département :** {dep} · **Commune :** {commune}")
 
+    # Colonne d'affichage uniquement (ID_Tache brut conservé tel quel pour
+    # l'inférence : les modèles A ont été entraînés sur ces catégories).
+    sub["Tache"] = sub["ID_Tache"].str.replace(r"^P2AE_", "", regex=True)
+
     # Prédiction du modèle retenu, par ligne, selon l'unité
     def predire(row):
         X = pd.DataFrame([row[CAT_FEATURES_A + NUM_FEATURES_A]])
@@ -172,9 +176,10 @@ def page_ressources():
 
     st.markdown("#### Détail par tâche et matériel")
     affichage = sub[
-        ["ID_Tache", "Designation", "Unite", "Qte_Prevue", "Qte_Realisee",
+        ["Tache", "Designation", "Unite", "Qte_Prevue", "Qte_Realisee",
          "Quantite_Restante", "Prediction_Modele", "Taux_Realisation"]
     ].rename(columns={
+        "Tache": "Tâche",
         "Quantite_Restante": "Restant (observé)",
         "Prediction_Modele": "Restant (modèle)",
         "Taux_Realisation": "Taux réalisation",
@@ -183,7 +188,7 @@ def page_ressources():
     st.dataframe(affichage, width="stretch", hide_index=True)
 
     st.markdown("#### Quantité restante par tâche (observé vs modèle)")
-    graf = sub.groupby("ID_Tache")[["Quantite_Restante", "Prediction_Modele"]].sum().sort_values(
+    graf = sub.groupby("Tache")[["Quantite_Restante", "Prediction_Modele"]].sum().sort_values(
         "Quantite_Restante", ascending=True
     )
     fig, ax = plt.subplots(figsize=(8, max(2.5, 0.4 * len(graf))))

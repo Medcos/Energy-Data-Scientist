@@ -1,5 +1,5 @@
 """
-Anonymisation des données ElecTrack Pro / P2AE.
+Anonymisation des données ElecTrack Pro.
 
 Périmètre couvert (identifié lors de l'audit des 29 feuilles, Jour 1) :
 - Emails d'agents terrain (7 valeurs uniques, présentes dans 6 feuilles)
@@ -101,7 +101,7 @@ def anonymize_sheets(
 # confidentialité contractuelle/institutionnelle d'un marché financé par un
 # bailleur international, une fois croisées avec des données de performance
 # nommées (avancement, retard, anomalies). Les départements restent en clair
-# (information déjà publique de l'existence du P2AE dans ces 4 départements).
+# (information déjà publique de l'existence du projet dans ces 4 départements).
 # ----------------------------------------------------------------------------
 def build_locality_pseudonym_mapping(localites: list[str]) -> dict[str, str]:
     """Construit un mapping localité réelle -> pseudonyme stable (Localite_A, B...).
