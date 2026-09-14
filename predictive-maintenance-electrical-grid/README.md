@@ -1,8 +1,10 @@
-⚡ Predictive Maintenance for Industrial Machines
+# ⚡ Predictive Maintenance for Industrial Machines
 
 [🇫🇷 Version française](README.fr.md)
 
 `Python 3.11+` `scikit-learn 1.6` `XGBoost 2.0` `Streamlit App`
+
+📂 **Data Science & Predictive Analytics** — Project 1/3 · [Portfolio home](../README.md) · Next: [Predictive Rollout & Supply Forecast →](../predictive-avancement-projet)
 
 ## Overview
 
@@ -52,7 +54,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Why my background matters
+## Why My Background Matters
 
 The `power_kw` feature was not in the original dataset. It was derived from electromechanical engineering knowledge: mechanical power computed from torque and rotational speed (P = T × ω), a fundamental relationship in rotating machinery diagnostics. SHAP analysis confirmed this single feature captures 100% of the Power Failure signal — domain-driven feature engineering of this kind typically outperforms purely data-driven approaches on industrial datasets.
 

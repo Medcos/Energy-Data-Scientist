@@ -2,12 +2,25 @@
 
 [🇫🇷 Version française](README.fr.md)
 
+`n8n` `LangGraph` `FastAPI` `Streamlit` `Python` `SqliteSaver`
+
+📂 **Data Science & Predictive Analytics** — Project 3/3 · [Portfolio home](../README.md) · [← Predictive Rollout & Supply Forecast](../predictive-avancement-projet)
+
 Portfolio demonstration of an automation agent derived from a real electrification-jobsite
 tracking project (data, locality names, and deadlines are fictional — see
 [Confidentiality](#confidentiality) below).
 
+Built by Medico Diomande — Electromechanical Engineer (10 years field experience on World Bank / AFD / AfDB electrification projects) + Data Scientist. Third and most complex installment of the Data Science & Predictive Analytics track, following [Predictive Maintenance](../predictive-maintenance-electrical-grid) and [Predictive Rollout & Supply Forecast](../predictive-avancement-projet) — this project moves from predicting outcomes to automating the weekly operational decision itself.
+
 **[▶ Live demo](https://energy-data-scientist-kbqch4dr9lgc3aypv3kmgx.streamlit.app/)** —
 Streamlit app deployed on Streamlit Community Cloud.
+
+## Business Impact
+
+- → Automates a weekly manual cross-check — declared inactivity vs. inactivity measured in the field-tracking system — that previously depended on a supervisor's memory and a spreadsheet
+- → Typo-tolerant locality name resolution with explicit ambiguity detection, instead of a silent wrong match between two similarly-named localities
+- → Trend-aware status classification: week-over-week history is persisted, so a single noisy week doesn't flip a locality to "critical" if the underlying trend is fine
+- → One LangGraph graph serves three entry points (n8n weekly trigger, single-locality API call, Streamlit simulator) — a single source of truth for the classification logic instead of three drifting implementations
 
 ## The use case
 
@@ -155,6 +168,17 @@ producing a negative `reste_a_faire`. `agent/nodes.reste_actionnable()` filters 
 definition of "actionable remaining work" used throughout the project (text report,
 history page, status classification).
 
+## Why My Background Matters
+
+The design choices in this agent come directly from ten years running electrification
+worksites, not from a generic automation tutorial. "No activity for 3 months" is a real
+field-reporting threshold, not an arbitrary number. Locality-name ambiguity is a real
+recurring problem when 55 field agents report on similarly-named localities by hand —
+hence a fuzzy matcher with an explicit ambiguity margin rather than a naive best-match.
+And a trend-aware classifier (weighing history, not just the latest week) reflects how an
+experienced mission supervisor actually judges whether a stalled locality is a blip or a
+genuine problem — the same judgment call this agent now makes automatically, every Monday.
+
 ## Confidentiality
 
 **Real**: the country (Benin), the 4 departments, and the aggregated work quantities per
@@ -170,3 +194,7 @@ All generated data is checked with a leak-detection grep before every delivery.
 Days 1 to 6 of the implementation plan are complete (data, agent, checkpointer + tests,
 n8n integration, API + Streamlit app, Streamlit Community Cloud deployment validated in
 real conditions, README + diagrams). Remaining: publication and portfolio card (Day 7).
+
+---
+
+Author: Medico Diomande · dmedcos@yahoo.fr · linkedin.com/in/medico-diomande-data · Available for remote missions

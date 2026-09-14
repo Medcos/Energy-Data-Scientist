@@ -1,8 +1,10 @@
-⚡ Maintenance Prédictive pour Machines Industrielles
+# ⚡ Maintenance Prédictive pour Machines Industrielles
 
 [🇬🇧 English version](README.md)
 
 `Python 3.11+` `scikit-learn 1.6` `XGBoost 2.0` `Application Streamlit`
+
+📂 **Data Science & Predictive Analytics** — Projet 1/3 · [Accueil du portfolio](../README.fr.md) · Suivant : [Prévision d'avancement et d'approvisionnement →](../predictive-avancement-projet)
 
 ## Aperçu
 
@@ -24,7 +26,7 @@ Développé par Medico Diomande — Ingénieur Électromécanicien (10 ans d'exp
 - → 3 modèles comparés par niveau : Régression Logistique, Random Forest, Gradient Boosting
 - → Optimisation du seuil de décision par label (courbe Precision-Recall, maximisation du F1)
 - → Interprétabilité SHAP pour les deux niveaux, validant la cohérence physique des mécanismes appris
-- → Dashboard Streamlit en ligne :[maintenance-predictive-medico.streamlit.app](https://maintenance-predictive-medico.streamlit.app/)]
+- → Dashboard Streamlit en ligne : [maintenance-predictive-medico.streamlit.app](https://maintenance-predictive-medico.streamlit.app/)
 
 ## Résultats — Niveau 1 (Prédiction de panne)
 

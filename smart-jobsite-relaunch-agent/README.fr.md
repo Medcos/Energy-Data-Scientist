@@ -2,12 +2,25 @@
 
 [🇬🇧 English version](README.md)
 
+`n8n` `LangGraph` `FastAPI` `Streamlit` `Python` `SqliteSaver`
+
+📂 **Data Science & Predictive Analytics** — Projet 3/3 · [Accueil du portfolio](../README.fr.md) · [← Prévision d'Avancement et d'Approvisionnement](../predictive-avancement-projet)
+
 Démonstration portfolio d'un agent d'automatisation dérivé d'un projet réel de suivi de
 chantiers d'électrification (données, noms de localités et échéances fictifs — voir
 [Confidentialité](#confidentialité) ci-dessous).
 
+Développé par Medico Diomande — Ingénieur électromécanicien (10 ans d'expérience terrain sur des projets d'électrification financés par la Banque Mondiale / AFD / BAD) + Data Scientist. Troisième et plus complexe volet du parcours Data Science & Predictive Analytics, après [Maintenance Prédictive](../predictive-maintenance-electrical-grid) et [Prévision d'Avancement et d'Approvisionnement](../predictive-avancement-projet) — ce projet passe de la prédiction de résultats à l'automatisation de la décision opérationnelle hebdomadaire elle-même.
+
 **[▶ Démo en ligne](https://energy-data-scientist-kbqch4dr9lgc3aypv3kmgx.streamlit.app/)** —
 app Streamlit déployée sur Streamlit Community Cloud.
+
+## Impact métier
+
+- → Automatise une vérification hebdomadaire manuelle — inactivité déclarée vs. inactivité mesurée dans le système de suivi terrain — qui reposait auparavant sur la mémoire d'un chef de mission et un tableur
+- → Résolution de nom de localité tolérante aux fautes de frappe, avec détection explicite d'ambiguïté, plutôt qu'une confusion silencieuse entre deux localités aux noms proches
+- → Classification de statut sensible à la tendance : l'historique semaine après semaine est persisté, si bien qu'une seule semaine bruitée ne fait pas basculer une localité en « critique » si la tendance sous-jacente est correcte
+- → Un seul graphe LangGraph sert trois points d'entrée (déclencheur hebdomadaire n8n, appel API sur une localité, simulateur Streamlit) — une source unique de vérité pour la logique de classification, au lieu de trois implémentations qui divergeraient
 
 ## Le cas d'usage
 
@@ -151,6 +164,19 @@ donne un `reste_a_faire` négatif. `agent/nodes.reste_actionnable()` filtre ces 
 définition du "reste actionnable" dans tout le projet (rapport texte, page Historique,
 classification de statut).
 
+## Pourquoi mon expérience fait la différence
+
+Les choix de conception de cet agent viennent directement de dix ans passés à piloter des
+chantiers d'électrification, pas d'un tutoriel d'automatisation générique. « Pas d'activité
+depuis 3 mois » est un vrai seuil de reporting terrain, pas un chiffre arbitraire.
+L'ambiguïté sur les noms de localités est un problème réel et récurrent quand 55 agents
+terrain saisissent à la main des noms de localités qui se ressemblent — d'où un matcher
+flou avec une marge d'ambiguïté explicite plutôt qu'une simple correspondance approchée.
+Et une classification sensible à la tendance (qui pondère l'historique, pas seulement la
+dernière semaine) reflète la façon dont un chef de mission expérimenté juge réellement si
+une localité à l'arrêt est un simple accident ou un vrai problème — le même jugement que
+cet agent porte désormais automatiquement, chaque lundi.
+
 ## Confidentialité
 
 **Réel** : le pays (Bénin), les 4 départements, et les quantités de travaux agrégées par
@@ -166,3 +192,7 @@ Toute donnée générée est vérifiée par un grep anti-fuite avant chaque livr
 Jours 1 à 6 du plan de mise en place terminés (données, agent, checkpointer + tests,
 intégration n8n, API + app Streamlit, déploiement Streamlit Community Cloud validé en
 conditions réelles, README + diagrammes). Reste : publication et carte portfolio (Jour 7).
+
+---
+
+Auteur : Medico Diomande · dmedcos@yahoo.fr · linkedin.com/in/medico-diomande-data · Disponible pour missions à distance

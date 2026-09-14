@@ -1,8 +1,10 @@
-⚡ ElecTrack Pro — Field Intervention Management SaaS for Utility Infrastructure
+# ⚡ ElecTrack Pro — Field Intervention Management SaaS for Utility Infrastructure
 
 [🇫🇷 Version française](README.fr.md)
 
 `AppSheet` `Google Apps Script` `Google Sheets` `Multi-Tenant SaaS` `Role-Based Security`
+
+📂 **Platform Engineering** · [Portfolio home](../README.md)
 
 ## Overview
 

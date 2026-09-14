@@ -1,8 +1,10 @@
-⚡ ElecTrack Pro — Plateforme SaaS de Gestion d'Interventions Terrain pour Infrastructures Électriques
+# ⚡ ElecTrack Pro — Plateforme SaaS de Gestion d'Interventions Terrain pour Infrastructures Électriques
 
 [🇬🇧 English version](README.md)
 
 `AppSheet` `Google Apps Script` `Google Sheets` `SaaS Multi-Tenant` `Sécurité par Rôle`
+
+📂 **Ingénierie Plateforme** · [Accueil du portfolio](../README.fr.md)
 
 ## Présentation
 
