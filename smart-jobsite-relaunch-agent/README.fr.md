@@ -86,7 +86,7 @@ flowchart TD
     GEN --> ENDB([END])
 ```
 
-`route_depart` (Jour 5) permet au même graphe de servir deux entrées : une localité déjà
+`route_depart` permet au même graphe de servir deux entrées : une localité déjà
 connue (endpoint `/analyser-localite`, ou chaque étape du fan-out de
 `/traiter-rapport-hebdomadaire`) saute directement à `lire_reste_a_faire` ; un email brut
 repasse par le chemin historique (`extraction_localites` → `resoudre_localite`).
@@ -187,11 +187,13 @@ interventions, échéances précises de planning, nom du projet/client d'origine
 
 Toute donnée générée est vérifiée par un grep anti-fuite avant chaque livraison.
 
-## Statut
+## Ce qui est implémenté
 
-Jours 1 à 6 du plan de mise en place terminés (données, agent, checkpointer + tests,
-intégration n8n, API + app Streamlit, déploiement Streamlit Community Cloud validé en
-conditions réelles, README + diagrammes). Reste : publication et carte portfolio (Jour 7).
+Le pipeline complet est construit et validé de bout en bout : la couche de données
+synthétiques, l'agent LangGraph à 9 nœuds avec checkpointing persisté (couvert par des
+tests de non-régression), l'intégration du déclencheur hebdomadaire n8n, le backend
+FastAPI et l'app Streamlit — y compris un déploiement Streamlit Community Cloud
+fonctionnel, validé en conditions réelles et pas seulement en local.
 
 ---
 

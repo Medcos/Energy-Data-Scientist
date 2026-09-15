@@ -6,6 +6,8 @@
 
 📂 **Ingénierie Plateforme** · [Accueil du portfolio](../README.fr.md)
 
+🎥 **[Voir la démo](./demo)** — présentations vidéo desktop et mobile de la plateforme en situation réelle.
+
 ## Présentation
 
 Solution SaaS réutilisable de gestion d'interventions terrain sur chantiers d'infrastructures électriques, construite sur **AppSheet + Google Sheets + Google Apps Script**. Conçue non pas comme un simple formulaire de collecte, mais comme un **produit multi-client dès la conception** : aucun élément spécifique à un client codé en dur, ni dans le modèle de données, ni dans les formules, ni dans les scripts d'automatisation.

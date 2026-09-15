@@ -30,7 +30,7 @@ Full detail in [`reports/synthese_resultats_publique.md`](reports/synthese_resul
 
 ## 🔒 Confidentiality note
 
-This repository contains **pseudonymized** data from a real project financed by an international donor. Locality and commune names are replaced with generic identifiers (`Localite_001`…`Localite_055`, `Commune_A`…`Commune_I`); only departments (a public administrative division of Benin) are left in clear. The models provided (`models/public/`) were **retrained on this pseudonymized data** — no categorical encoder in this repository contains a real name. Full detail on this confidentiality policy (decision D5) is documented in [`reports/cadrage_jour1.md`](reports/cadrage_jour1.md) (French).
+This repository contains **pseudonymized** data from a real project financed by an international donor. Locality and commune names are replaced with generic identifiers (`Localite_001`…`Localite_055`, `Commune_A`…`Commune_I`); only departments (a public administrative division of Benin) are left in clear. The models provided (`models/public/`) were **retrained on this pseudonymized data** — no categorical encoder in this repository contains a real name.
 
 *(The detailed analysis notebooks, which use real data, remain for internal use only and are not published — see repository structure below.)*
 

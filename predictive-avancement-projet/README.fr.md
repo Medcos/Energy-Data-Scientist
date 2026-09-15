@@ -30,7 +30,7 @@ Détail complet dans [`reports/synthese_resultats_publique.md`](reports/synthese
 
 ## 🔒 Note de confidentialité
 
-Ce dépôt contient des données **pseudonymisées** issues d'un projet réel financé par un bailleur international. Les noms de localités et de communes sont remplacés par des identifiants génériques (`Localite_001`…`Localite_055`, `Commune_A`…`Commune_I`) ; seuls les départements (division administrative publique du Bénin) restent en clair. Les modèles fournis (`models/public/`) ont été **ré-entraînés sur ces données pseudonymisées** — aucun encodeur catégoriel du dépôt ne contient de nom réel. Le détail de cette politique de confidentialité (décision D5) est documenté dans [`reports/cadrage_jour1.md`](reports/cadrage_jour1.md).
+Ce dépôt contient des données **pseudonymisées** issues d'un projet réel financé par un bailleur international. Les noms de localités et de communes sont remplacés par des identifiants génériques (`Localite_001`…`Localite_055`, `Commune_A`…`Commune_I`) ; seuls les départements (division administrative publique du Bénin) restent en clair. Les modèles fournis (`models/public/`) ont été **ré-entraînés sur ces données pseudonymisées** — aucun encodeur catégoriel du dépôt ne contient de nom réel.
 
 *(Les notebooks d'analyse détaillée avec données réelles restent un usage interne, non publié — voir la structure du dépôt ci-dessous.)*
 

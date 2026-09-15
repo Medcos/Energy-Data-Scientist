@@ -6,6 +6,8 @@
 
 📂 **Platform Engineering** · [Portfolio home](../README.md)
 
+🎥 **[Watch the demo](./demo)** — desktop and mobile walkthroughs of the platform in use.
+
 ## Overview
 
 Reusable SaaS platform for managing field interventions on utility infrastructure worksites — built on **AppSheet + Google Sheets + Google Apps Script**. Designed not as a one-off data-collection form but as a **productized, multi-client-ready system**: no client-specific hardcoding anywhere in the data model, formulas, or automation scripts.
