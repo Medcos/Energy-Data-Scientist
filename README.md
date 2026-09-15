@@ -36,7 +36,12 @@ A progression of three projects of increasing complexity, sharing one throughlin
 
 ## About me
 
-Electromechanical engineer with 10+ years of field experience on international donor-financed electrification programs (World Bank, AFD, African Development Bank), holder of an RNCP Level 7 Data Science certification (CentraleSupélec / OpenClassrooms). Each project in this portfolio pairs that field experience with applied ML/data-science and automation work — see each project's own "Why My Background Matters" section for specifics.
+Electromechanical engineer with 10+ years of field experience on international donor-financed electrification programs (World Bank, AFD, African Development Bank). Each project in this portfolio pairs that field experience with applied ML/data-science and automation work — see each project's own "Why My Background Matters" section for specifics.
+
+**Certifications**
+
+- → RNCP Level 7 Data Science (CentraleSupélec / OpenClassrooms)
+- → *Building AI Agents and Agentic Workflows* — IBM / Coursera specialization (LangGraph, CrewAI, AutoGen, BeeAI), Aug 2026 — [verify](https://coursera.org/verify/specialization/ENTIGWJF6KCS). Direct grounding for the [Jobsite Relaunch Agent](./smart-jobsite-relaunch-agent) project above.
 
 Available for remote data science, ML, and infrastructure-automation consulting missions.
 

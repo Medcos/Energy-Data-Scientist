@@ -36,7 +36,12 @@ Une progression de trois projets de complexité croissante, avec un même fil co
 
 ## À propos de moi
 
-Ingénieur électromécanicien avec plus de 10 ans d'expérience terrain sur des programmes d'électrification financés par des bailleurs internationaux (Banque Mondiale, AFD, Banque Africaine de Développement), titulaire d'une certification Data Science RNCP niveau 7 (CentraleSupélec / OpenClassrooms). Chaque projet de ce portfolio associe cette expérience terrain à un travail appliqué de ML/data science et d'automatisation — voir la section « Pourquoi mon expérience fait la différence » de chaque projet pour le détail.
+Ingénieur électromécanicien avec plus de 10 ans d'expérience terrain sur des programmes d'électrification financés par des bailleurs internationaux (Banque Mondiale, AFD, Banque Africaine de Développement). Chaque projet de ce portfolio associe cette expérience terrain à un travail appliqué de ML/data science et d'automatisation — voir la section « Pourquoi mon expérience fait la différence » de chaque projet pour le détail.
+
+**Certifications**
+
+- → Data Science RNCP niveau 7 (CentraleSupélec / OpenClassrooms)
+- → *Building AI Agents and Agentic Workflows* — spécialisation IBM / Coursera (LangGraph, CrewAI, AutoGen, BeeAI), août 2026 — [vérifier](https://coursera.org/verify/specialization/ENTIGWJF6KCS). Assise directe du projet [Agent de Relance de Chantier](./smart-jobsite-relaunch-agent) ci-dessus.
 
 Disponible pour des missions de conseil à distance en data science, ML et automatisation des infrastructures.
 
