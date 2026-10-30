@@ -8,7 +8,7 @@
 
 Ten years running electrification worksites showed what actually breaks in the field: unreliable connectivity, progress reports that don't match reality, materials reconciliation that has to survive renamed reference data. Every project below turns one of those real operational problems into a working, documented, and — where possible — publicly deployed system.
 
-All projects are inspired by real donor-financed electrification programs in West Africa (SBEE Bénin, 55 localities across 4 departments). Real aggregate geography and quantities are kept for credibility; locality names, GPS coordinates, and any client-identifying detail are pseudonymized or synthetic. Each project's own **Confidentiality** section states exactly what is real vs. anonymized, and every public delivery is checked with a leak-detection grep beforehand.
+Apart from Project 1, which uses a public synthetic benchmark dataset (AI4I 2020, not field data), all projects are inspired by real donor-financed electrification programs in West Africa (SBEE Bénin, 55 localities across 4 departments). Real aggregate geography and quantities are kept for credibility; locality names, GPS coordinates, and any client-identifying detail are pseudonymized or synthetic. Each project's own **Confidentiality** section states exactly what is real vs. anonymized, and every public delivery is checked with a leak-detection grep beforehand.
 
 ## Track 1 — Data Science & Predictive Analytics
 
@@ -16,7 +16,7 @@ A progression of three projects of increasing complexity, sharing one throughlin
 
 | # | Project | What it does | Key result | Live demo |
 |---|---|---|---|---|
-| 1 | [Predictive Maintenance for Industrial Machines](./predictive-maintenance-electrical-grid) | Two-level classification: will a machine fail, and which of 5 modes is the root cause | AUC-ROC 0.98 · F1 up to 1.00 on root-cause | [Open →](https://maintenance-predictive-medico.streamlit.app/) |
+| 1 | [Predictive Maintenance for Industrial Machines](./predictive-maintenance-electrical-grid) | Two-level classification: will a machine fail, and which of 5 modes is the root cause | AUC-ROC 0.98 · F1 0.84 ± 0.03 with a clean threshold protocol · public synthetic dataset | [Open →](https://maintenance-predictive-medico.streamlit.app/) |
 | 2 | [Predictive Rollout & Supply Forecast](./predictive-avancement-projet) | 3-model suite forecasting material needs, progress, and delay risk on a rural electrification rollout | 93% delay-risk detection · ~2-3× lower forecast error than no model | [Open →](https://energy-data-scientist-mdz2vr9ozqxhey3t5nprkh.streamlit.app) |
 | 3 | [Jobsite Relaunch Agent](./smart-jobsite-relaunch-agent) | LangGraph + n8n agent that reads weekly field reports, resolves locality names, and classifies stalled worksites automatically | 9-node stateful agent · persisted week-over-week history | [Open →](https://energy-data-scientist-kbqch4dr9lgc3aypv3kmgx.streamlit.app/) |
 

@@ -8,7 +8,7 @@
 
 Dix ans à piloter des chantiers d'électrification ont montré ce qui casse réellement sur le terrain : connectivité peu fiable, rapports d'avancement qui ne collent pas à la réalité, réconciliation de matériaux qui doit survivre au renommage de données de référence. Chaque projet ci-dessous transforme l'un de ces problèmes opérationnels réels en système fonctionnel, documenté et — quand c'est possible — déployé publiquement.
 
-Tous les projets s'inspirent de programmes réels d'électrification financés par des bailleurs internationaux en Afrique de l'Ouest (SBEE Bénin, 55 localités réparties sur 4 départements). La géographie et les quantités agrégées réelles sont conservées pour la crédibilité ; les noms de localités, coordonnées GPS et tout élément identifiant un client sont pseudonymisés ou synthétiques. La section **Confidentialité** de chaque projet précise exactement ce qui est réel et ce qui est anonymisé, et chaque livraison publique est vérifiée par un grep anti-fuite au préalable.
+À l'exception du Projet 1, qui utilise un jeu public synthétique de référence (AI4I 2020, pas des données de terrain), tous les projets s'inspirent de programmes réels d'électrification financés par des bailleurs internationaux en Afrique de l'Ouest (SBEE Bénin, 55 localités réparties sur 4 départements). La géographie et les quantités agrégées réelles sont conservées pour la crédibilité ; les noms de localités, coordonnées GPS et tout élément identifiant un client sont pseudonymisés ou synthétiques. La section **Confidentialité** de chaque projet précise exactement ce qui est réel et ce qui est anonymisé, et chaque livraison publique est vérifiée par un grep anti-fuite au préalable.
 
 ## Parcours 1 — Data Science & Predictive Analytics
 
@@ -16,7 +16,7 @@ Une progression de trois projets de complexité croissante, avec un même fil co
 
 | # | Projet | Ce qu'il fait | Résultat clé | Démo en ligne |
 |---|---|---|---|---|
-| 1 | [Maintenance Prédictive pour Machines Industrielles](./predictive-maintenance-electrical-grid) | Classification à deux niveaux : la machine va-t-elle tomber en panne, et lequel des 5 modes en est la cause racine | AUC-ROC 0,98 · F1 jusqu'à 1,00 sur la cause racine | [Ouvrir →](https://maintenance-predictive-medico.streamlit.app/) |
+| 1 | [Maintenance Prédictive pour Machines Industrielles](./predictive-maintenance-electrical-grid) | Classification à deux niveaux : la machine va-t-elle tomber en panne, et lequel des 5 modes en est la cause racine | AUC-ROC 0,98 · F1 0,84 ± 0,03 avec un seuil choisi proprement · jeu public synthétique | [Ouvrir →](https://maintenance-predictive-medico.streamlit.app/) |
 | 2 | [Prévision d'Avancement et d'Approvisionnement](./predictive-avancement-projet) | Suite de 3 modèles prévoyant les besoins en matériel, l'avancement et le risque de retard sur un chantier d'électrification rurale | 93 % de détection du risque de retard · erreur ~2-3× plus faible que sans modèle | [Ouvrir →](https://energy-data-scientist-mdz2vr9ozqxhey3t5nprkh.streamlit.app) |
 | 3 | [Agent de Relance de Chantier](./smart-jobsite-relaunch-agent) | Agent LangGraph + n8n qui lit les rapports terrain hebdomadaires, résout les noms de localités et classe automatiquement les chantiers à l'arrêt | Agent à état avec graphe à 9 nœuds · historique persisté semaine après semaine | [Ouvrir →](https://energy-data-scientist-kbqch4dr9lgc3aypv3kmgx.streamlit.app/) |
 

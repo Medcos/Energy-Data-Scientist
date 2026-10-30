@@ -2,21 +2,23 @@
 
 [🇫🇷 Version française](README.fr.md)
 
-`Python 3.11+` `scikit-learn 1.6` `XGBoost 2.0` `Streamlit App`
+`Python 3.11+` `scikit-learn >=1.3,<1.6` `XGBoost 2.0+` `Streamlit App`
 
 📂 **Data Science & Predictive Analytics** — Project 1/3 · [Portfolio home](../README.md) · Next: [Predictive Rollout & Supply Forecast →](../predictive-avancement-projet)
 
+> **About the data — read first.** Despite the folder name (`predictive-maintenance-electrical-grid`, kept so that existing links and the live demo keep working), this project does **not** use electrical-grid data. It uses the public **AI4I 2020 Predictive Maintenance Dataset** (S. Matzka, UCI Machine Learning Repository, licence CC BY 4.0, [DOI 10.24432/C5HS5C](https://doi.org/10.24432/C5HS5C)): **10,000 synthetic records of industrial machines** (air and process temperature, rotational speed, torque, tool wear), 339 failures (3.4%). Most failure labels (287 of 339) are produced by published rules, so the results below show a method on a public benchmark, not performance on real equipment. See [Reliability and limits](#reliability-and-limits).
+
 ## Overview
 
-Two-level machine learning system to predict equipment failures on industrial machines (temperature, rotational speed, torque, tool wear) and identify the root cause among 5 failure modes. Level 1 (binary classification) achieves **AUC-ROC of 0.98** and **F1 = 0.88** on failure detection. Level 2 (multi-label classification) identifies the specific failure mode (Heat Dissipation, Power, Overstrain, Tool Wear, Random) with **F1 up to 1.00** depending on the mode.
+Two-level machine learning system to predict equipment failures on industrial machines (temperature, rotational speed, torque, tool wear) and identify the root cause among 5 failure modes. Level 1 (binary classification) reaches an **AUC-ROC of 0.98** and an **F1 of 0.88 as published in the notebooks — 0.84 ± 0.03 when the decision threshold is chosen without the test set** (see [Reliability and limits](#reliability-and-limits)). Level 2 (multi-label classification) identifies the specific failure mode (Heat Dissipation, Power, Overstrain, Tool Wear, Random) with an F1 up to 1.00 depending on the mode; that top score is on Power Failure, which this dataset defines by a power threshold.
 
-Built by Medico Diomande — Electromechanical Engineer (10 years field experience on World Bank / AFD / AfDB electrification projects) + Data Scientist. The domain expertise directly informs the feature engineering (power, thermal stress derived from physical laws).
+Built by Medico Diomande — Electromechanical Engineer (10 years field experience on World Bank / AFD / AfDB electrification projects) + Data Scientist. The domain expertise informs the feature engineering (power, thermal stress derived from physical laws).
 
 ## Business Impact
 
 - → Two-stage decision system: "Will it fail?" then "Why will it fail?" for targeted maintenance action
-- → Physics-grounded feature engineering validated by SHAP analysis (power_kw alone explains 100% of Power Failure signal)
-- → Decision thresholds optimized per failure mode instead of generic 0.5 cutoff, improving F1 by up to +15%
+- → Physics-grounded feature engineering checked with SHAP analysis (`power_kw` alone explains the Power Failure label, which this dataset defines by a power threshold)
+- → Decision thresholds tuned per failure mode instead of a generic 0.5 cutoff (tuned on the test set, so the gain is optimistic)
 - → Interactive Streamlit dashboard for non-technical stakeholders — live demo, no notebook required
 
 ## Key Features
@@ -24,11 +26,11 @@ Built by Medico Diomande — Electromechanical Engineer (10 years field experien
 - → Domain-specific feature engineering (`temp_diff`, `power_kw = T × ω`, `thermal_stress`)
 - → SMOTE vs class-weighting comparison — class-weighting retained after empirical testing (SMOTE degraded precision on tree-based models)
 - → 3 models compared per level: Logistic Regression, Random Forest, Gradient Boosting
-- → Per-label decision threshold optimization (Precision-Recall curve, F1 maximization)
-- → SHAP interpretability for both levels, validating physical coherence of learned mechanisms
+- → Per-label decision threshold optimization on the Precision-Recall curve (F1 maximization, on the test set)
+- → SHAP interpretability for both levels, checking the physical coherence of learned mechanisms
 - → Live Streamlit dashboard: [maintenance-predictive-medico.streamlit.app](https://maintenance-predictive-medico.streamlit.app/)
 
-## Results — Level 1 (Failure Prediction)
+## Results — Level 1 (Failure Prediction), as published in the notebooks
 
 | Model | Precision | Recall | F1 | AUC-ROC |
 |---|---|---|---|---|
@@ -36,7 +38,9 @@ Built by Medico Diomande — Electromechanical Engineer (10 years field experien
 | Random Forest | 0.94 | 0.66 | 0.78 | 0.97 |
 | **Gradient Boosting ★** | **0.93** | **0.82** | **0.88** | **0.98** |
 
-## Results — Level 2 (Failure Mode Identification)
+Gradient Boosting row: decision threshold 0.4236, tuned on the test set. See [Reliability and limits](#reliability-and-limits) for a re-run.
+
+## Results — Level 2 (Failure Mode Identification), as published in the notebooks
 
 | Mode | Cause | F1-score | Threshold |
 |---|---|---|---|
@@ -46,19 +50,40 @@ Built by Medico Diomande — Electromechanical Engineer (10 years field experien
 | TWF | Tool Wear Failure | heuristic rule | usage-based |
 | RNF | Random Failure | not predictable | — |
 
+Thresholds are tuned on the test set. The PWF score of 1.00 is tautological: the PWF label is defined by a power threshold, and `power_kw` is that power.
+
+## Reliability and limits
+
+A re-run of the notebooks (October 2026, scikit-learn 1.9.1, stratified 80/20 split) reproduces Logistic Regression and Gradient Boosting, and gives the following.
+
+| Question | Result |
+|---|---|
+| Does a simple rule do as well? | A 3-condition physical rule (no training; thresholds published with the dataset) reaches precision 1.00, recall 0.84, F1 0.91 on the test set (F1 0.92 on all 10,000 records), above Gradient Boosting (0.87). It wins by construction: 287 of the 339 failure labels are generated by these rules. |
+| Is F1 = 0.88 reliable? | It relies on a decision threshold (0.4236) tuned on the test set. Reproduced: F1 0.87 (55 of the 68 test failures, versus 56 published). With the threshold chosen inside the training set, 5-fold × 3 cross-validation gives F1 0.84 ± 0.03; the 95% bootstrap interval on the 68 test failures is 0.79 to 0.92. |
+| Random Forest | The re-run gives recall 0.79 (published: 0.66); the cause is not identified. |
+| Level 2 | Per-mode thresholds are also tuned on the test set. TWF and RNF are not predicted by the model. |
+| How many failures are needed? | On this dataset: F1 0.67 with 27 training failures, 0.76 with 54, 0.81 with 108, 0.87 with 271. |
+| Incomplete maintenance logs | If 20% of failures are missing from the training labels, recall falls from 0.81 to 0.67; at 40%, to 0.43. |
+| `thermal_stress` | Adds nothing (negative permutation importance). |
+
+What this project demonstrates is a method — baselines, a clean threshold protocol, an error margin — on a public benchmark, not a validated result on real equipment. The figures above do not transfer to other assets: they have to be measured on the history of the equipment concerned.
+
+`data/AEP_hourly.csv` (an hourly load series) is not used by any notebook or by the app.
+
 ## Usage
 
 ```
-git clone https://github.com/Medcos/Energy-Data-Scientist/tree/main/predictive-maintenance-electrical-grid
+git clone https://github.com/Medcos/Energy-Data-Scientist.git
+cd Energy-Data-Scientist/predictive-maintenance-electrical-grid
 pip install -r requirements.txt
-streamlit run app.py
+streamlit run maintenance_predictive/app.py
 ```
 
 ## Why My Background Matters
 
-The `power_kw` feature was not in the original dataset. It was derived from electromechanical engineering knowledge: mechanical power computed from torque and rotational speed (P = T × ω), a fundamental relationship in rotating machinery diagnostics. SHAP analysis confirmed this single feature captures 100% of the Power Failure signal — domain-driven feature engineering of this kind typically outperforms purely data-driven approaches on industrial datasets.
+The `power_kw` feature was not in the original dataset. It was derived from electromechanical engineering knowledge: mechanical power computed from torque and rotational speed (P = T × ω), a fundamental relationship in rotating machinery diagnostics. On this synthetic dataset it captures the Power Failure label entirely, because that label is defined by a power threshold: a check of the physics, not evidence of performance on real equipment.
 
-Similarly, `temp_diff` (process-to-ambient temperature differential) was identified as the third most important global predictor, directly reflecting heat dissipation efficiency — a concept familiar from HTA/BTA electrical network operations.
+Similarly, `temp_diff` (process-to-ambient temperature differential) ranks among the most important predictors in the published SHAP analysis, reflecting heat dissipation efficiency — a concept familiar from HTA/BTA electrical network operations.
 
 ---
 
